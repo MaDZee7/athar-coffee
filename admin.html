@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة تحكم الإدارة | محمصة أثر للقهوة المختصة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #efe0cd;
+      --bg-surface: #f6eee3;
+      --bg-card-alt: #dfc8a9;
+      --espresso: #332113;
+      --espresso-hover: #4a311d;
+      --text-main: #2e1d10;
+      --text-muted: #5c432e;
+      --border-color: rgba(158, 125, 93, 0.25);
+      --accent: #b0743b;
+      --success: #166534;
+      --success-bg: #dcfce7;
+      --warning: #9a3412;
+      --warning-bg: #ffedd5;
+      --info: #1e40af;
+      --info-bg: #dbeafe;
+      --radius-lg: 20px;
+      --radius-md: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: 'Tajawal', 'Cairo', sans-serif;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 270px 1fr;
+    }
+
+    /* ================= SIDEBAR ================= */
+    .admin-sidebar {
+      background-color: var(--espresso);
+      color: #f6eee3;
+      padding: 26px 18px;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px 22px;
+      border-bottom: 1px solid rgba(246, 238, 227, 0.14);
+      margin-bottom: 20px;
+    }
+
+    .sidebar-brand h2 {
+      font-family: 'Cairo', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--bg-card-alt);
+    }
+
+    .sidebar-badge {
+      background: rgba(223, 200, 169, 0.2);
+      color: var(--bg-card-alt);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .side-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      color: rgba(246, 238, 227, 0.8);
+      padding: 12px 14px;
+      border-radius: 13px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: right;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .side-btn:hover {
+      background: rgba(246, 238, 227, 0.1);
+      color: #ffffff;
+    }
+
+    .side-btn.active {
+      background: var(--bg-card-alt);
+      color: var(--espresso);
+      font-weight: 800;
+    }
+
+    .sidebar-footer {
+      padding-top: 18px;
+      border-top: 1px solid rgba(246, 238, 227, 0.14);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .storefront-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(246, 238, 227, 0.12);
+      color: #f6eee3;
+      text-decoration: none;
+      padding: 11px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 800;
+      transition: background 0.2s ease;
+    }
+
+    .storefront-link:hover {
+      background: rgba(246, 238, 227, 0.22);
+    }
+
+    /* ================= MAIN WORKSPACE ================= */
+    .admin-main {
+      padding: 24px 34px 50px;
+      overflow-x: hidden;
+    }
+
+    .admin-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-surface);
+      padding: 16px 24px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .roaster-live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--success-bg);
+      color: var(--success);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .pulse-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 4px rgba(22, 101, 52, 0.2);
+    }
+
+    /* Views */
+    .admin-view {
+      display: none;
+    }
+
+    .admin-view.active {
+      display: block;
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 26px;
+    }
+
+    .kpi-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .kpi-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .kpi-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .kpi-trend {
+      font-size: 12px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .kpi-value {
+      font-family: 'Cairo', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--espresso);
+      margin-bottom: 4px;
+    }
+
+    .kpi-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    /* Charts & Grid Panels */
+    .dashboard-split {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 22px;
+      margin-bottom: 26px;
+    }
+
+    .panel-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      border: 1px solid var(--border-color);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .panel-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--espresso);
+    }
+
+    /* Bar Chart Visual */
+    .chart-bars {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 14px;
+      align-items: end;
+      height: 210px;
+      padding-top: 24px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .bar-fill {
+      width: 100%;
+      max-width: 42px;
+      background: linear-gradient(to top, var(--espresso), #7c5130);
+      border-radius: 10px 10px 4px 4px;
+      transition: height 0.4s ease;
+      position: relative;
+    }
+
+    .bar-fill:hover {
+      background: var(--accent);
+    }
+
+    .bar-val {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--espresso);
+    }
+
+    .bar-day {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding-bottom: 8px;
+    }
+
+    /* Progress items */
+    .crop-progress-item {
+      margin-bottom: 15px;
+    }
+
+    .crop-progress-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      height: 9px;
+      background: var(--bg-page);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--espresso);
+      border-radius: 999px;
+    }
+
+    /* Data Tables */
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: right;
+    }
+
+    .admin-table th {
+      background: var(--bg-page);
+      color: var(--espresso);
+      font-size: 13.5px;
+      font-weight: 800;
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .admin-table td {
+      padding: 13px 14px;
+      border-bottom: 1px solid rgba(158, 125, 93, 0.14);
+      font-size: 14.5px;
+      vertical-align: middle;
+    }
+
+    .admin-table tr:hover td {
+      background: rgba(239, 224, 205, 0.35);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .status-completed { background: var(--success-bg); color: var(--success); }
+    .status-roasting { background: var(--warning-bg); color: var(--warning); }
+    .status-shipping { background: var(--info-bg); color: var(--info); }
+
+    .btn-admin {
+      background: var(--espresso);
+      color: #f6eee3;
+      border: none;
+      border-radius: 10px;
+      padding: 9px 18px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-admin:hover { background: var(--espresso-hover); }
+
+    .btn-admin-sm {
+      background: var(--bg-card-alt);
+      color: var(--espresso);
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      background: var(--bg-page);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .filter-pill.active {
+      background: var(--espresso);
+      color: #f6eee3;
+    }
+
+    /* Modal */
+    .admin-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(34, 21, 11, 0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      padding: 20px;
+    }
+
+    .admin-modal.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .admin-modal-box {
+      background: var(--bg-surface);
+      border-radius: 22px;
+      max-width: 520px;
+      width: 100%;
+      padding: 28px;
+      border: 1px solid var(--border-color);
+    }
+
+    .field-row {
+      margin-bottom: 14px;
+    }
+
+    .field-row label {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--espresso);
+      margin-bottom: 5px;
+    }
+
+    .field-row input, .field-row select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(158, 125, 93, 0.45);
+      font-family: inherit;
+      font-size: 14px;
+      background: #fff;
+    }
+
+    .admin-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      background: var(--espresso);
+      color: #f6eee3;
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.25s ease;
+      z-index: 300;
+    }
+
+    .admin-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 1024px) {
+      body { grid-template-columns: 1fr; }
+      .admin-sidebar { height: auto; position: relative; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .dashboard-split { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand">
+      <h2>أثر • الإدارة</h2>
+      <span class="sidebar-badge">v2.0 PRO</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="side-btn active" data-target="view-overview">📊 نظرة عامة والمؤشرات</button>
+      <button class="side-btn" data-target="view-orders">📦 إدارة الطلبات والفواتير</button>
+      <button class="side-btn" data-target="view-products">☕ المحاصيل والمنتجات</button>
+      <button class="side-btn" data-target="view-roastery">🌱 مخزون البن الأخضر والحمص</button>
+      <button class="side-btn" data-target="view-customers">👥 العملاء والاشتراكات</button>
+      <button class="side-btn" data-target="view-coupons">🎟️ الكوبونات والتسويق</button>
+      <button class="side-btn" data-target="view-settings">⚙️ إعدادات المتجر والقالب</button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="index.html" class="storefront-link">🌐 معاينة المتجر الحي ←</a>
+      <a href="shop.html" class="storefront-link" style="background: transparent; border: 1px solid rgba(246,238,227,0.2);">🛍️ صفحة المتجر الكامل</a>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="admin-main">
+    <!-- Top Bar -->
+    <header class="admin-topbar">
+      <div>
+        <h1 style="font-family: 'Cairo', sans-serif; font-size: 22px; font-weight: 900; color: var(--espresso);">مركز إدارة محمصة ومتجر أثر</h1>
+        <p style="font-size: 13.5px; color: var(--text-muted);">تحكم كامل في المبيعات، دفعات التحميص اليومية، المخزون، والاشتراكات الشهرية</p>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+        <div class="roaster-live-pill">
+          <span class="pulse-dot"></span>
+          <span>المحمصة نشطة: دفعة #409 (إثيوبيا هيرلوم • 204°C)</span>
+        </div>
+        <button class="btn-admin" onclick="openAddProductModal()">+ إضافة محصول جديد</button>
+      </div>
+    </header>
+
+    <!-- 1. OVERVIEW VIEW -->
+    <section class="admin-view active" id="view-overview">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">إجمالي المبيعات (هذا الشهر)</span>
+            <span class="kpi-trend">+١٨.٤٪ ↑</span>
+          </div>
+          <div class="kpi-value">١٤٨,٩٥٠ ر.س</div>
+          <div class="kpi-sub">مقارنة بـ ١٢٥,٨٠٠ ر.س الشهر الماضي</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">الطلبات النشطة اليوم</span>
+            <span class="kpi-trend">+١٢.١٪ ↑</span>
+          </div>
+          <div class="kpi-value">٦٤ طلباً</div>
+          <div class="kpi-sub">٢٨ قيد التحميص • ٣٦ جاهز للشحن</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">إنتاج الحمص اليومي</span>
+            <span class="kpi-trend">١٠٠٪ جودة SCA</span>
+          </div>
+          <div class="kpi-value">١٨٥ كجم</div>
+          <div class="kpi-sub">موزعة على ١٢ دفعة تحميص صغيرة</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">الاشتراكات الشهرية النشطة</span>
+            <span class="kpi-trend">+٢٤ مشترك جديد</span>
+          </div>
+          <div class="kpi-value">٤١٢ مشترك</div>
+          <div class="kpi-sub">عائد شهري متكرر: ٣٧,٠٨٠ ر.س</div>
+        </div>
+      </div>
+
+      <div class="dashboard-split">
+        <!-- Weekly Revenue Chart -->
+        <div class="panel-card">
+          <div class="panel-header">
+            <h3 class="panel-title">أداء المبيعات اليومية (آخر ٧ أيام)</h3>
+            <span style="font-size: 13px; color: var(--text-muted); font-weight: 700;">المتوسط اليومي: ٥,٤٢٠ ر.س</span>
+          </div>
+
+          <div class="chart-bars">
+            <div class="bar-col">
+              <span class="bar-val">٤.٢k</span>
+              <div class="bar-fill" style="height: 55%;"></div>
+              <span class="bar-day">السبت</span>
+            </div>
+            <div class="bar-col">
+              <span class="bar-val">٥.١k</span>
+              <div class="bar-fill" style="height: 68%;"></div>
+              <span class="bar-day">الأحد</span>
+            </div>
+            <div class="bar-col">
+              <span class="bar-val">٤.٨k</span>
+              <div class="bar-fill" style="height: 62%;"></div>
+              <span class="bar-day">الإثنين</span>
+            </div>
+            <div class="bar-col">
+              <span class="bar-val">٦.٣k</span>
+              <div class="bar-fill" style="height: 82%;"></div>
+              <span class="bar-day">الثلاثاء</span>
+            </div>
+            <div class="bar-col">
+              <span class="bar-val">٥.٩k</span>
+              <div class="bar-fill" style="height: 76%;"></div>
+              <span class="bar-day">الأربعاء</span>
+            </div>
+            <div class="bar-col">
+              <span class="bar-val">٧.٤k</span>
+              <div class="bar-fill" style="height: 96%;"></div>
+              <span class="bar-day">الخميس</span>
+            </div>
+            <div class="bar-col">
+              <span class="bar-val">٦.٨k</span>
+              <div class="bar-fill" style="height: 88%;"></div>
+              <span class="bar-day">الجمعة</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Selling Crops -->
+        <div class="panel-card">
+          <div class="panel-header">
+            <h3 class="panel-title">المحاصيل الأكثر مبيعاً</h3>
+          </div>
+
+          <div class="crop-progress-item">
+            <div class="crop-progress-top">
+              <span>إثيوبيا هيرلوم (٢٥٠غ / ١ كجم)</span>
+              <span>٣٤٪ (٥٢٠ كيس)</span>
+            </div>
+            <div class="progress-track"><div class="progress-bar" style="width: 84%;"></div></div>
+          </div>
+
+          <div class="crop-progress-item">
+            <div class="crop-progress-top">
+              <span>خلطة البيت للإسبريسو</span>
+              <span>٢٨٪ (٤٣٠ كيس)</span>
+            </div>
+            <div class="progress-track"><div class="progress-bar" style="width: 72%;"></div></div>
+          </div>
+
+          <div class="crop-progress-item">
+            <div class="crop-progress-top">
+              <span>كولومبيا أنتيوكيا</span>
+              <span>١٩٪ (٢٩٠ كيس)</span>
+            </div>
+            <div class="progress-track"><div class="progress-bar" style="width: 56%;"></div></div>
+          </div>
+
+          <div class="crop-progress-item">
+            <div class="crop-progress-top">
+              <span>رواندا غاتارا</span>
+              <span>١٢٪ (١٨٥ كيس)</span>
+            </div>
+            <div class="progress-track"><div class="progress-bar" style="width: 42%;"></div></div>
+          </div>
+
+          <div class="crop-progress-item" style="margin-bottom: 0;">
+            <div class="crop-progress-top">
+              <span>اليمن حراز (إصدار نادر)</span>
+              <span>٧٪ (١١٠ أكياس)</span>
+            </div>
+            <div class="progress-track"><div class="progress-bar" style="width: 28%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Orders Preview -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <h3 class="panel-title">أحدث الطلبات الواردة</h3>
+          <button class="btn-admin-sm" onclick="switchAdminView('view-orders')">عرض كافة الطلبات ←</button>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>رقم الطلب</th>
+                <th>العميل</th>
+                <th>المدينة</th>
+                <th>المحاصيل والطحنة</th>
+                <th>الإجمالي</th>
+                <th>طريقة الدفع</th>
+                <th>الحالة</th>
+              </tr>
+            </thead>
+            <tbody id="recentOrdersBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ORDERS MANAGEMENT VIEW -->
+    <section class="admin-view" id="view-orders">
+      <div class="panel-card">
+        <div class="panel-header">
+          <div>
+            <h3 class="panel-title">إدارة الطلبات وحالات التحميص والشحن</h3>
+            <p style="font-size: 13.5px; color: var(--text-muted);">يمكنك تغيير حالة الطلب مباشرة ليصل إشعار فوري للعميل عبر الرسائل النصية</p>
+          </div>
+          <div class="filter-pills">
+            <button class="filter-pill active" onclick="filterOrders('all', this)">الكل (٨)</button>
+            <button class="filter-pill" onclick="filterOrders('قيد التحميص', this)">قيد التحميص</button>
+            <button class="filter-pill" onclick="filterOrders('تم الشحن', this)">تم الشحن</button>
+            <button class="filter-pill" onclick="filterOrders('مكتمل', this)">مكتمل</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>رقم الطلب</th>
+                <th>التاريخ</th>
+                <th>العميل</th>
+                <th>المدينة</th>
+                <th>تفاصيل السلة</th>
+                <th>المبلغ</th>
+                <th>تحديث الحالة</th>
+                <th>إجراء</th>
+              </tr>
+            </thead>
+            <tbody id="allOrdersBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PRODUCTS & CROPS VIEW -->
+    <section class="admin-view" id="view-products">
+      <div class="panel-card">
+        <div class="panel-header">
+          <div>
+            <h3 class="panel-title">كتالوج المحاصيل وأدوات التحضير (١٢ منتجاً)</h3>
+            <p style="font-size: 13.5px; color: var(--text-muted);">إدارة الأسعار، المخزون، الإيحاءات، ودرجات التحميص</p>
+          </div>
+          <button class="btn-admin" onclick="openAddProductModal()">+ إضافة محصول / أداة</button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>الصورة</th>
+                <th>المنتج</th>
+                <th>رمز SKU</th>
+                <th>المصدر / الوصف</th>
+                <th>الإيحاءات</th>
+                <th>السعر</th>
+                <th>المخزون</th>
+                <th>إجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. GREEN BEANS & ROASTERY INVENTORY VIEW -->
+    <section class="admin-view" id="view-roastery">
+      <div class="panel-card">
+        <div class="panel-header">
+          <div>
+            <h3 class="panel-title">مخزون خياش البن الأخضر وسجل التحميص</h3>
+            <p style="font-size: 13.5px; color: var(--text-muted);">مراقبة الرطوبة، تقييم SCA، والكميات المتبقية بالكيلوجرام في مستودع المحمصة</p>
+          </div>
+          <button class="btn-admin" onclick="showAdminToast('تم تسجيل دفعة تحميص جديدة (١٥ كجم) وخصمها من المخزون الأخضر 🔥')">+ تسجيل دفعة تحميص جديدة</button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>السلالة والمصدر</th>
+                <th>المعالجة</th>
+                <th>تقييم SCA</th>
+                <th>نسبة الرطوبة</th>
+                <th>المخزون المتبقي (كجم)</th>
+                <th>تاريخ آخر حمصة</th>
+                <th>الحالة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>إثيوبيا يرقاتشيف هيرلوم</strong></td>
+                <td>مجففة</td>
+                <td>88.5 نقطة</td>
+                <td>10.6%</td>
+                <td><strong>٤٢٠ كجم</strong> (٧ خياش)</td>
+                <td>اليوم - ٠٩:٣٠ ص</td>
+                <td><span class="status-badge status-completed">مخزون وفير</span></td>
+              </tr>
+              <tr>
+                <td><strong>كولومبيا أنتيوكيا سوبريمو</strong></td>
+                <td>مغسولة</td>
+                <td>86.75 نقطة</td>
+                <td>11.1%</td>
+                <td><strong>٣١٠ كجم</strong> (٥ خياش)</td>
+                <td>اليوم - ١١:١٥ ص</td>
+                <td><span class="status-badge status-completed">مخزون وفير</span></td>
+              </tr>
+              <tr>
+                <td><strong>اليمن حراز — سلالة تبيكا</strong></td>
+                <td>مجففة لاهوائية</td>
+                <td>90.25 نقطة</td>
+                <td>10.2%</td>
+                <td><strong>٦٥ كجم</strong> (خيشة واحدة)</td>
+                <td>أمس</td>
+                <td><span class="status-badge status-roasting">شارف على النفاد</span></td>
+              </tr>
+              <tr>
+                <td><strong>رواندا غاتارا بوربون</strong></td>
+                <td>مجففة</td>
+                <td>87.5 نقطة</td>
+                <td>10.9%</td>
+                <td><strong>١٩٠ كجم</strong> (٣ خياش)</td>
+                <td>اليوم - ٠٨:٠٠ ص</td>
+                <td><span class="status-badge status-completed">مستقر</span></td>
+              </tr>
+              <tr>
+                <td><strong>البرازيل موجيانا</strong></td>
+                <td>مجففة</td>
+                <td>84.5 نقطة</td>
+                <td>11.4%</td>
+                <td><strong>٥٤٠ كجم</strong> (٩ خياش)</td>
+                <td>اليوم - ٠٧:٠٠ ص</td>
+                <td><span class="status-badge status-completed">مخزون وفير</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CUSTOMERS & SUBSCRIPTIONS VIEW -->
+    <section class="admin-view" id="view-customers">
+      <div class="panel-card">
+        <div class="panel-header">
+          <h3 class="panel-title">قاعدة العملاء والاشتراكات الشهرية وحسابات الجملة (B2B)</h3>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>العميل / الجهة</th>
+                <th>نوع الحساب</th>
+                <th>المدينة</th>
+                <th>الباقة / المشتريات</th>
+                <th>إجمالي الإنفاق</th>
+                <th>الحالة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>عبدالله العتيبي</strong></td>
+                <td>مشترك شهري (باقة الذواقة)</td>
+                <td>الرياض</td>
+                <td>٣ أكياس شهرياً • حبوب كاملة</td>
+                <td>٢,٤٥٠ ر.س</td>
+                <td><span class="status-badge status-completed">نشط</span></td>
+              </tr>
+              <tr>
+                <td><strong>مقهى نوتس المختص (B2B)</strong></td>
+                <td>عميل جملة (مقهى)</td>
+                <td>جدة</td>
+                <td>٤٥ كجم شهرياً (خلطة البيت + إثيوبيا)</td>
+                <td>٣٨,٩٠٠ ر.س</td>
+                <td><span class="status-badge status-completed">عقد سنوي</span></td>
+              </tr>
+              <tr>
+                <td><strong>سارة الدوسري</strong></td>
+                <td>مشترك شهري (باقة التقطير)</td>
+                <td>الخبر</td>
+                <td>كيسان شهرياً • طحنة V60</td>
+                <td>١,١٢٠ ر.س</td>
+                <td><span class="status-badge status-completed">نشط</span></td>
+              </tr>
+              <tr>
+                <td><strong>فهد القحطاني</strong></td>
+                <td>عميل متجر</td>
+                <td>الرياض</td>
+                <td>٨ طلبات فردية</td>
+                <td>٩٤٠ ر.س</td>
+                <td><span class="status-badge status-completed">نشط</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. COUPONS VIEW -->
+    <section class="admin-view" id="view-coupons">
+      <div class="panel-card">
+        <div class="panel-header">
+          <h3 class="panel-title">أكواد الخصم والحملات الترويجية</h3>
+          <button class="btn-admin" onclick="showAdminToast('تم إنشاء وتفعيل كود الخصم الجديد بنجاح 🎟️')">+ إنشاء كود خصم</button>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>كود الخصم</th>
+                <th>نسبة / قيمة الخصم</th>
+                <th>الحد الأدنى للطلب</th>
+                <th>عدد مرات الاستخدام</th>
+                <th>الحالة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>ATHAR15</strong></td>
+                <td>١٥٪ خصم ترحيبي</td>
+                <td>بدون حد أدنى</td>
+                <td>٣٤٢ مرة</td>
+                <td><span class="status-badge status-completed">مفعّل</span></td>
+              </tr>
+              <tr>
+                <td><strong>FREESHIP</strong></td>
+                <td>شحن مجاني</td>
+                <td>١٢٠ ر.س</td>
+                <td>١٩٨ مرة</td>
+                <td><span class="status-badge status-completed">مفعّل</span></td>
+              </tr>
+              <tr>
+                <td><strong>CAFE25</strong></td>
+                <td>٢٥٪ لطلبات الجملة الأولى</td>
+                <td>١,٠٠٠ ر.س</td>
+                <td>٢٩ مرة</td>
+                <td><span class="status-badge status-completed">مفعّل</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SETTINGS VIEW -->
+    <section class="admin-view" id="view-settings">
+      <div class="panel-card" style="max-width: 760px;">
+        <h3 class="panel-title" style="margin-bottom: 18px;">إعدادات المتجر وبوابات الدفع والشحن</h3>
+        <form onsubmit="event.preventDefault(); showAdminToast('تم حفظ إعدادات المتجر بنجاح ✅');">
+          <div class="field-row">
+            <label>اسم المتجر الرسمي</label>
+            <input type="text" value="محمصة أثر للقهوة المختصة | Athar Specialty Coffee" />
+          </div>
+          <div class="field-row">
+            <label>البريد الإلكتروني لخدمة العملاء</label>
+            <input type="email" value="care@atharcoffee.sa" />
+          </div>
+          <div class="field-row">
+            <label>حد الشحن المجاني التلقائي (ر.س)</label>
+            <input type="number" value="199" />
+          </div>
+          <div class="field-row">
+            <label>بوابات الدفع المفعلة</label>
+            <input type="text" value="مدى (Mada) • Apple Pay • تابي (Tabby) • تمارا (Tamara) • Visa/MasterCard" />
+          </div>
+          <button type="submit" class="btn-admin" style="margin-top: 10px;">حفظ الإعدادات</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ADD PRODUCT MODAL -->
+  <div class="admin-modal" id="addProductModal">
+    <div class="admin-modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+        <h3 style="font-family: 'Cairo', sans-serif; color: var(--espresso);">إضافة محصول أو منتج جديد</h3>
+        <button class="btn-admin-sm" onclick="closeAddProductModal()">✕</button>
+      </div>
+      <form id="addProductForm">
+        <div class="field-row">
+          <label>اسم المحصول / المنتج</label>
+          <input type="text" id="newProdTitle" placeholder="مثال: كوستاريكا تارازو" required />
+        </div>
+        <div class="field-row">
+          <label>بلد المصدر والارتفاع</label>
+          <input type="text" id="newProdOrigin" placeholder="مثال: كوستاريكا • ١٨٠٠ متر" required />
+        </div>
+        <div class="field-row">
+          <label>الإيحاءات</label>
+          <input type="text" id="newProdNotes" placeholder="مثال: عسل، مشمش، شوكولاتة بالحليب" required />
+        </div>
+        <div class="field-row">
+          <label>السعر (ر.س)</label>
+          <input type="number" id="newProdPrice" placeholder="88" required />
+        </div>
+        <div class="field-row">
+          <label>الكمية المتوفرة</label>
+          <input type="number" id="newProdStock" placeholder="50" required />
+        </div>
+        <button type="submit" class="btn-admin" style="width: 100%; justify-content: center;">حفظ وإضافة للكتالوج</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="admin-toast" id="adminToast"></div>
+
+  <script src="js/athar-core.js"></script>
+  <script>
+    const ORDERS_DATA = [
+      { id: '#ATH-8492', date: 'اليوم ١٤:٢٠', customer: 'محمد الشهري', city: 'الرياض', items: 'إثيوبيا هيرلوم (٢)، خلطة البيت (١) • حبوب كاملة', total: '٢١٥ ر.س', method: 'Apple Pay', status: 'قيد التحميص' },
+      { id: '#ATH-8491', date: 'اليوم ١٣:٠٥', customer: 'نورة القحطاني', city: 'جدة', items: 'رواندا غاتارا (١)، طقم V60 (١) • طحنة V60', total: '٣٠٠ ر.س', method: 'تابي Tabby', status: 'تم الشحن' },
+      { id: '#ATH-8490', date: 'اليوم ١١:٤٠', customer: 'خالد العتيبي', city: 'الخبر', items: 'اليمن حراز (٢) • حبوب كاملة', total: '٢٣٠ ر.س', method: 'مدى Mada', status: 'قيد التحميص' },
+      { id: '#ATH-8489', date: 'اليوم ٠٩:١٥', customer: 'ريم السبيعي', city: 'الرياض', items: 'كولومبيا أنتيوكيا (٣) • طحنة إسبريسو', total: '٢٤٠ ر.س', method: 'Apple Pay', status: 'مكتمل' },
+      { id: '#ATH-8488', date: 'أمس ٢١:١٠', customer: 'سلطان الحربي', city: 'المدينة المنورة', items: 'البرازيل موجيانا (٢)، كوب أثر الفخاري (٢)', total: '٢٨٠ ر.س', method: 'تمارا Tamara', status: 'تم الشحن' },
+      { id: '#ATH-8487', date: 'أمس ١٨:٤٥', customer: 'مقهى رشفة (جملة)', city: 'الرياض', items: 'خلطة البيت (١٥ كجم) • حبوب كاملة', total: '١,٩٥٠ ر.س', method: 'تحويل بنكي', status: 'مكتمل' }
+    ];
+
+    function showAdminToast(msg) {
+      const el = document.getElementById('adminToast');
+      el.textContent = msg;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 2800);
+    }
+
+    function getStatusBadgeClass(status) {
+      if (status === 'مكتمل') return 'status-completed';
+      if (status === 'تم الشحن') return 'status-shipping';
+      return 'status-roasting';
+    }
+
+    function renderOrdersTables(filter = 'all') {
+      const recentBody = document.getElementById('recentOrdersBody');
+      const allBody = document.getElementById('allOrdersBody');
+
+      recentBody.innerHTML = ORDERS_DATA.slice(0, 4).map(o => `
+        <tr>
+          <td><strong>${o.id}</strong></td>
+          <td>${o.customer}</td>
+          <td>${o.city}</td>
+          <td>${o.items}</td>
+          <td><strong>${o.total}</strong></td>
+          <td>${o.method}</td>
+          <td><span class="status-badge ${getStatusBadgeClass(o.status)}">${o.status}</span></td>
+        </tr>
+      `).join('');
+
+      const filtered = filter === 'all' ? ORDERS_DATA : ORDERS_DATA.filter(o => o.status === filter);
+      allBody.innerHTML = filtered.map((o, idx) => `
+        <tr>
+          <td><strong>${o.id}</strong></td>
+          <td>${o.date}</td>
+          <td>${o.customer}</td>
+          <td>${o.city}</td>
+          <td>${o.items}</td>
+          <td><strong>${o.total}</strong></td>
+          <td>
+            <select class="btn-admin-sm" onchange="updateOrderStatus('${o.id}', this.value)">
+              <option value="قيد التحميص" ${o.status === 'قيد التحميص' ? 'selected' : ''}>قيد التحميص</option>
+              <option value="تم الشحن" ${o.status === 'تم الشحن' ? 'selected' : ''}>تم الشحن</option>
+              <option value="مكتمل" ${o.status === 'مكتمل' ? 'selected' : ''}>مكتمل</option>
+            </select>
+          </td>
+          <td>
+            <button class="btn-admin-sm" onclick="showAdminToast('تم فتح الفاتورة الضريبية للطلب ${o.id} 🖨️')">طباعة فاتورة</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function updateOrderStatus(orderId, newStatus) {
+      const ord = ORDERS_DATA.find(o => o.id === orderId);
+      if (ord) {
+        ord.status = newStatus;
+        renderOrdersTables();
+        showAdminToast(`تم تحديث حالة الطلب ${orderId} إلى "${newStatus}" ✅`);
+      }
+    }
+
+    function filterOrders(status, btn) {
+      document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderOrdersTables(status);
+    }
+
+    function renderAdminProducts() {
+      const body = document.getElementById('adminProductsBody');
+      body.innerHTML = ATHAR_CATALOG.map((p, i) => `
+        <tr>
+          <td><img src="${p.img}" alt="${p.title}" style="width: 52px; height: 42px; object-fit: cover; border-radius: 8px;" /></td>
+          <td><strong>${p.title}</strong></td>
+          <td><code style="font-size: 12px;">${p.sku}</code></td>
+          <td>${p.origin}</td>
+          <td style="font-size: 13px; color: var(--text-muted);">${p.notes}</td>
+          <td><strong>${p.price} ر.س</strong></td>
+          <td><span class="status-badge status-completed">${p.stock} متوفر</span></td>
+          <td>
+            <button class="btn-admin-sm" onclick="showAdminToast('تم تحديث مخزون وسعر ${p.title} ✅')">تعديل</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function switchAdminView(targetId) {
+      document.querySelectorAll('.side-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.target === targetId);
+      });
+      document.querySelectorAll('.admin-view').forEach(v => {
+        v.classList.toggle('active', v.id === targetId);
+      });
+    }
+
+    document.querySelectorAll('.side-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchAdminView(btn.dataset.target));
+    });
+
+    function openAddProductModal() {
+      document.getElementById('addProductModal').classList.add('open');
+    }
+    function closeAddProductModal() {
+      document.getElementById('addProductModal').classList.remove('open');
+    }
+
+    document.getElementById('addProductForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const title = document.getElementById('newProdTitle').value;
+      const origin = document.getElementById('newProdOrigin').value;
+      const notes = document.getElementById('newProdNotes').value;
+      const price = Number(document.getElementById('newProdPrice').value);
+      const stock = Number(document.getElementById('newProdStock').value);
+
+      ATHAR_CATALOG.unshift({
+        id: 'athar-new-' + Date.now(),
+        title,
+        origin,
+        notes,
+        price,
+        priceLabel: price + ' ر.س',
+        stock,
+        sku: 'ATH-NEW-' + Math.floor(100 + Math.random() * 899),
+        img: 'assets/prod1.jpg'
+      });
+
+      renderAdminProducts();
+      closeAddProductModal();
+      switchAdminView('view-products');
+      e.target.reset();
+      showAdminToast(`تمت إضافة "${title}" إلى كتالوج المحمصة بنجاح ☕`);
+    });
+
+    renderOrdersTables();
+    renderAdminProducts();
+  </script>
+</body>
+</html>

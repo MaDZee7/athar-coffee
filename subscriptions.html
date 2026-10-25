@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>باقات الاشتراك الشهري | محمصة أثر</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/athar-theme.css" />
+  <style>
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 50px;
+    }
+    .plan-card {
+      background: var(--bg-product-card);
+      border-radius: 26px;
+      padding: 32px 26px;
+      border: 1.5px solid rgba(158, 125, 93, 0.25);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition);
+    }
+    .plan-card.featured {
+      background: var(--bg-hero-card);
+      border: 2px solid var(--espresso);
+      transform: translateY(-8px);
+    }
+    .plan-price {
+      font-family: 'Cairo', sans-serif;
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--espresso);
+      margin: 14px 0;
+    }
+    .plan-features {
+      list-style: none;
+      margin: 16px 0 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    @media (max-width: 920px) { .plans-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="site-header">
+      <div class="header-actions">
+        <button class="icon-btn" id="cartBtn"><span class="cart-badge" id="cartCount">0</span>🛒</button>
+        <button class="login-btn" id="loginBtn" type="button">تسجيل الدخول</button>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">الرئيسية</a>
+        <a href="shop.html" class="nav-link">المتجر</a>
+        <a href="subscriptions.html" class="nav-link active">الاشتراكات</a>
+        <a href="brewing-guide.html" class="nav-link">دليل التحضير</a>
+        <a href="wholesale.html" class="nav-link">مبيعات الجملة</a>
+        <a href="about.html" class="nav-link">قصتنا</a>
+        <a href="blog.html" class="nav-link">المدونة</a>
+        <a href="locations.html" class="nav-link">الفروع</a>
+        <a href="faq.html" class="nav-link">الأسئلة</a>
+      </nav>
+      <a href="index.html" class="brand-logo"><img src="assets/logo.png" alt="أثر" /></a>
+    </header>
+
+    <section class="page-hero">
+      <div>
+        <span class="badge-pill">🔄 قهوتك الطازجة تصل لباب بيتك تلقائياً</span>
+        <h1>باقات اشتراك أثر الشهرية</h1>
+        <p>وفّر حتى ٢٠٪ مع شحن مجاني ثابت، واستمتع بمحاصيل محمصة خصيصاً لك بداية كل شهر مع إمكانية التعديل أو الإلغاء في أي وقت.</p>
+      </div>
+    </section>
+
+    <div class="plans-grid">
+      <div class="plan-card">
+        <span class="badge-pill" style="width: fit-content;">باقة البداية</span>
+        <h3>صندوق الاستكشاف (كيسان)</h3>
+        <div class="plan-price">١٣٥ ر.س <span style="font-size: 14px; font-weight: 600;">/ شهرياً</span></div>
+        <ul class="plan-features">
+          <li>✓ ٢ × ٢٥٠ غرام من محاصيل الموسم</li>
+          <li>✓ مناسبة للتقطير والإسبريسو</li>
+          <li>✓ بطاقة وصفات تحضير مفصلة</li>
+          <li>✓ خصم ١٢٪ مقارنة بالشراء الفردي</li>
+        </ul>
+        <button class="btn-primary" onclick="AtharStore.addItem('اشتراك شهري: صندوق الاستكشاف', 135, 'assets/prod2.jpg')">اشترك الآن في الباقة</button>
+      </div>
+
+      <div class="plan-card featured">
+        <span class="badge-pill" style="background: var(--espresso); color: #f6eee3; width: fit-content;">الأكثر طلباً ⭐</span>
+        <h3>صندوق الذواقة (٣ أكياس + إصدار نادر)</h3>
+        <div class="plan-price">١٩٩ ر.س <span style="font-size: 14px; font-weight: 600;">/ شهرياً</span></div>
+        <ul class="plan-features">
+          <li>✓ ٣ × ٢٥٠ غرام (يشمل محصولاً نادراً)</li>
+          <li>✓ شحن مجاني سريع لباب منزلك</li>
+          <li>✓ هدية فلاتر تقطير ورقية مع كل شحنة</li>
+          <li>✓ توفير ٢٠٪ وأولوية في المحاصيل المحدودة</li>
+        </ul>
+        <button class="btn-primary" onclick="AtharStore.addItem('اشتراك شهري: صندوق الذواقة', 199, 'assets/prod3.jpg')">اشترك الآن في الباقة</button>
+      </div>
+
+      <div class="plan-card">
+        <span class="badge-pill" style="width: fit-content;">باقة العائلة والمكتب</span>
+        <h3>صندوق الوفرة (٥ أكياس / ١.٢٥ كجم)</h3>
+        <div class="plan-price">٣١٠ ر.س <span style="font-size: 14px; font-weight: 600;">/ شهرياً</span></div>
+        <ul class="plan-features">
+          <li>✓ ٥ × ٢٥٠ غرام متنوعة من اختيارك</li>
+          <li>✓ شحن مجاني + هدية كوب فخاري في الشهر الأول</li>
+          <li>✓ إمكانية تقسيم الطحنات بين الإسبريسو والفلتر</li>
+          <li>✓ دعم مباشر من خبير التحميص</li>
+        </ul>
+        <button class="btn-primary" onclick="AtharStore.addItem('اشتراك شهري: صندوق الوفرة', 310, 'assets/prod1.jpg')">اشترك الآن في الباقة</button>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-bottom" style="padding-top: 0;">
+        <span>© ٢٠٢٦ محمصة أثر للقهوة المختصة.</span>
+        <a href="checkout.html" class="pay-pill">إتمام الاشتراك والدفع</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="modal-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="modal-header"><h3>سلة التسوق</h3><button class="modal-close" id="closeCartBtn">×</button></div>
+    <div class="cart-items-list" id="cartItemsList"></div>
+    <div style="border-top: 1px solid rgba(158,125,93,0.25); padding-top: 16px;">
+      <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: 800; margin-bottom: 14px;">
+        <span>الإجمالي:</span><span id="cartTotalPrice">٠ ر.س</span>
+      </div>
+      <button class="btn-primary" id="checkoutBtn" style="width: 100%;">إتمام الطلب</button>
+    </div>
+  </aside>
+  <script src="js/athar-core.js"></script>
+</body>
+</html>

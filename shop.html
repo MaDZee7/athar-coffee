@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>المتجر الكامل وتصفية المحاصيل | محمصة أثر</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/athar-theme.css" />
+  <style>
+    .shop-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .filter-sidebar {
+      background: var(--bg-product-card);
+      border-radius: 22px;
+      padding: 24px;
+      border: 1px solid rgba(158, 125, 93, 0.22);
+      position: sticky;
+      top: 86px;
+    }
+    .filter-group {
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(158, 125, 93, 0.18);
+    }
+    .filter-group:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .filter-group h4 { font-size: 16.5px; font-weight: 800; margin-bottom: 12px; }
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 9px;
+      cursor: pointer;
+    }
+    .shop-toolbar {
+      background: var(--bg-product-card);
+      border-radius: 16px;
+      padding: 14px 20px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      border: 1px solid rgba(158, 125, 93, 0.18);
+    }
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 980px) {
+      .shop-layout { grid-template-columns: 1fr; }
+      .filter-sidebar { position: static; }
+      .shop-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .shop-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="header-actions">
+        <button class="icon-btn" id="cartBtn" aria-label="سلة التسوق">
+          <span class="cart-badge" id="cartCount">0</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="21" r="1.5"/><circle cx="19" cy="21" r="1.5"/><path d="M2.5 3h2.8l2.2 11.2a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 1.9-1.4L23 6H6"/></svg>
+        </button>
+        <button class="login-btn" id="loginBtn" type="button">تسجيل الدخول</button>
+      </div>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">الرئيسية</a>
+        <a href="shop.html" class="nav-link active">المتجر</a>
+        <a href="subscriptions.html" class="nav-link">الاشتراكات</a>
+        <a href="brewing-guide.html" class="nav-link">دليل التحضير</a>
+        <a href="wholesale.html" class="nav-link">مبيعات الجملة</a>
+        <a href="about.html" class="nav-link">قصتنا</a>
+        <a href="blog.html" class="nav-link">المدونة</a>
+        <a href="locations.html" class="nav-link">الفروع</a>
+        <a href="faq.html" class="nav-link">الأسئلة</a>
+      </nav>
+
+      <a href="index.html" class="brand-logo"><img src="assets/logo.png" alt="أثر" /></a>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <div>
+        <div class="breadcrumb"><a href="index.html">الرئيسية</a> / <span>المتجر الكامل</span></div>
+        <h1>متجر محاصيل وأدوات محمصة أثر</h1>
+        <p>تصفح كافة محاصيل القهوة المختصة المحمصة يدوياً في دفعات صغيرة، وأدوات التقطير الخزفية الفاخرة.</p>
+      </div>
+      <div style="min-width: 260px;">
+        <input type="search" id="shopSearchInput" class="form-input" placeholder="ابحث عن محصول، دولة، أو إيحاء..." />
+      </div>
+    </section>
+
+    <!-- SHOP LAYOUT -->
+    <div class="shop-layout">
+      <aside class="filter-sidebar">
+        <div class="filter-group">
+          <h4>التصنيف</h4>
+          <label class="filter-option"><input type="radio" name="cat" value="all" checked /> جميع المنتجات (١٢)</label>
+          <label class="filter-option"><input type="radio" name="cat" value="specialty" /> محاصيل القهوة المختصة</label>
+          <label class="filter-option"><input type="radio" name="cat" value="rare" /> إصدارات نادرة وفاخرة</label>
+          <label class="filter-option"><input type="radio" name="cat" value="espresso" /> محاصيل الإسبريسو والحليب</label>
+          <label class="filter-option"><input type="radio" name="cat" value="tools" /> أدوات التحضير الخزفية</label>
+        </div>
+
+        <div class="filter-group">
+          <h4>نطاق السعر</h4>
+          <label class="filter-option"><input type="radio" name="price" value="all" checked /> الكل</label>
+          <label class="filter-option"><input type="radio" name="price" value="under85" /> أقل من ٨٥ ر.س</label>
+          <label class="filter-option"><input type="radio" name="price" value="over85" /> ٨٥ ر.س فأكثر</label>
+        </div>
+
+        <button class="btn-outline" style="width: 100%;" id="resetFiltersBtn">إعادة ضبط الفلاتر</button>
+      </aside>
+
+      <div>
+        <div class="shop-toolbar">
+          <strong id="resultsCountText">عرض ١٢ منتجاً</strong>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <label style="font-size: 14px; font-weight: 700;">الترتيب حسب:</label>
+            <select id="sortSelect" class="form-select" style="width: auto; padding: 7px 14px;">
+              <option value="featured">الأكثر مبيعاً</option>
+              <option value="price-asc">السعر: من الأقل للأعلى</option>
+              <option value="price-desc">السعر: من الأعلى للأقل</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="shop-grid" id="shopProductsGrid"></div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-bottom" style="padding-top: 0;">
+        <span>© ٢٠٢٦ محمصة أثر للقهوة المختصة — جميع الحقوق محفوظة.</span>
+        <div class="payment-badges">
+          <a href="index.html" class="pay-pill">الرئيسية</a>
+          <a href="checkout.html" class="pay-pill">إتمام الطلب</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- SLIDE-OVER CART DRAWER -->
+  <div class="modal-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="modal-header">
+      <h3>سلة التسوق</h3>
+      <button class="modal-close" id="closeCartBtn">×</button>
+    </div>
+    <div class="cart-items-list" id="cartItemsList"></div>
+    <div style="border-top: 1px solid rgba(158,125,93,0.25); padding-top: 16px;">
+      <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: 800; margin-bottom: 14px;">
+        <span>الإجمالي:</span>
+        <span id="cartTotalPrice">٠ ر.س</span>
+      </div>
+      <button class="btn-primary" id="checkoutBtn" style="width: 100%;">الانتقال لإتمام الطلب</button>
+    </div>
+  </aside>
+
+  <script src="js/athar-core.js"></script>
+  <script>
+    const gridEl = document.getElementById('shopProductsGrid');
+    const searchInput = document.getElementById('shopSearchInput');
+    const sortSelect = document.getElementById('sortSelect');
+    const countText = document.getElementById('resultsCountText');
+
+    function renderShop() {
+      const cat = document.querySelector('input[name="cat"]:checked').value;
+      const priceFilter = document.querySelector('input[name="price"]:checked').value;
+      const query = searchInput.value.trim().toLowerCase();
+      const sort = sortSelect.value;
+
+      let list = ATHAR_CATALOG.filter(item => {
+        if (cat !== 'all' && item.category !== cat) return false;
+        if (priceFilter === 'under85' && item.price >= 85) return false;
+        if (priceFilter === 'over85' && item.price < 85) return false;
+        if (query && !(item.title.includes(query) || item.origin.includes(query) || item.notes.includes(query))) return false;
+        return true;
+      });
+
+      if (sort === 'price-asc') list.sort((a, b) => a.price - b.price);
+      if (sort === 'price-desc') list.sort((a, b) => b.price - a.price);
+
+      countText.textContent = `عرض ${list.length} منتجاً`;
+
+      gridEl.innerHTML = list.map(p => `
+        <article class="catalog-card">
+          <a href="product.html?id=${p.id}" class="catalog-thumb">
+            <span class="roast-tag">${p.roast}</span>
+            <img src="${p.img}" alt="${p.title}" />
+          </a>
+          <div class="catalog-body">
+            <span class="catalog-origin">${p.origin} • ${p.altitude}</span>
+            <a href="product.html?id=${p.id}"><h3 class="catalog-title">${p.title}</h3></a>
+            <p class="catalog-notes">${p.notes}</p>
+            <div class="catalog-footer">
+              <span class="catalog-price">${p.priceLabel}</span>
+              <button class="add-cart-sm" onclick="AtharStore.addItem('${p.title}', ${p.price}, '${p.img}')">أضف للسلة +</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.querySelectorAll('input[name="cat"], input[name="price"]').forEach(r => r.addEventListener('change', renderShop));
+    searchInput.addEventListener('input', renderShop);
+    sortSelect.addEventListener('change', renderShop);
+    document.getElementById('resetFiltersBtn').addEventListener('click', () => {
+      document.querySelector('input[name="cat"][value="all"]').checked = true;
+      document.querySelector('input[name="price"][value="all"]').checked = true;
+      searchInput.value = '';
+      sortSelect.value = 'featured';
+      renderShop();
+    });
+
+    renderShop();
+  </script>
+</body>
+</html>

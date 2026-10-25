@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تسجيل الدخول وإنشاء حساب | محمصة أثر</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #efe0cd;
+      --bg-card: #f6eee3;
+      --bg-hero-card: #dfc8a9;
+      --espresso: #332113;
+      --espresso-hover: #4a311d;
+      --text-main: #2e1d10;
+      --text-muted: #5c432e;
+      --border-subtle: #9e7d5d;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: 'Tajawal', 'Cairo', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .top-bar {
+      max-width: 1240px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--espresso);
+      font-weight: 800;
+      background: var(--bg-hero-card);
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 15px;
+    }
+    .auth-container {
+      max-width: 1120px;
+      width: 92%;
+      margin: 10px auto 50px;
+      background: var(--bg-card);
+      border-radius: 30px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      box-shadow: 0 20px 50px rgba(51, 33, 19, 0.1);
+      border: 1px solid rgba(158, 125, 93, 0.25);
+    }
+    .auth-form-side {
+      padding: 48px 44px;
+    }
+    .auth-visual-side {
+      position: relative;
+      min-height: 540px;
+    }
+    .auth-visual-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .visual-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(35, 20, 10, 0.88) 0%, rgba(35, 20, 10, 0.2) 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 42px;
+      color: #f6eee3;
+    }
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--bg-page);
+      padding: 6px;
+      border-radius: 14px;
+      margin: 24px 0;
+    }
+    .tab {
+      border: none;
+      background: none;
+      padding: 11px;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 15.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .tab.active {
+      background: var(--espresso);
+      color: #f6eee3;
+    }
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--espresso);
+      margin-bottom: 7px;
+    }
+    .field input {
+      width: 100%;
+      padding: 13px 15px;
+      border-radius: 12px;
+      border: 1.3px solid rgba(158, 125, 93, 0.45);
+      background: #fff;
+      font-family: inherit;
+      font-size: 15px;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 999px;
+      border: none;
+      background: var(--espresso);
+      color: #f6eee3;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .submit-btn:hover { background: var(--espresso-hover); }
+    @media (max-width: 860px) {
+      .auth-container { grid-template-columns: 1fr; }
+      .auth-visual-side { min-height: 260px; order: -1; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-bar">
+    <a href="index.html" class="back-btn">→ العودة للرئيسية والمتجر</a>
+    <a href="index.html"><img src="assets/logo.png" alt="أثر" style="height: 52px;" /></a>
+  </header>
+
+  <main class="auth-container">
+    <div class="auth-form-side">
+      <h1 style="font-family: 'Cairo', sans-serif; font-size: 28px; font-weight: 900; color: var(--espresso);">مرحباً بك في عائلة أثر</h1>
+      <p style="color: var(--text-muted); font-size: 15.5px; margin-top: 6px;">سجّل دخولك لمتابعة طلباتك، إدارة اشتراكك الشهري، وكسب نقاط الولاء.</p>
+
+      <div class="tabs">
+        <button class="tab active" id="tLogin" onclick="switchTab('login')">تسجيل الدخول</button>
+        <button class="tab" id="tReg" onclick="switchTab('reg')">عضوية جديدة</button>
+      </div>
+
+      <form id="fLogin" onsubmit="handleAuth(event, 'تم تسجيل الدخول بنجاح! جاري تحويلك للمتجر...')">
+        <div class="field">
+          <label>البريد الإلكتروني أو رقم الجوال</label>
+          <input type="text" placeholder="05XXXXXXXX أو name@domain.com" required />
+        </div>
+        <div class="field">
+          <label>كلمة المرور</label>
+          <input type="password" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="submit-btn">تسجيل الدخول</button>
+      </form>
+
+      <form id="fReg" style="display: none;" onsubmit="handleAuth(event, 'تم إنشاء حسابك بنجاح! كود خصمك الترحيبي: ATHAR15')">
+        <div class="field">
+          <label>الاسم الكامل</label>
+          <input type="text" placeholder="الاسم الثلاثي" required />
+        </div>
+        <div class="field">
+          <label>رقم الجوال</label>
+          <input type="tel" placeholder="05XXXXXXXX" required />
+        </div>
+        <div class="field">
+          <label>البريد الإلكتروني</label>
+          <input type="email" placeholder="name@domain.com" required />
+        </div>
+        <div class="field">
+          <label>كلمة المرور</label>
+          <input type="password" placeholder="٨ خانات على الأقل" required />
+        </div>
+        <button type="submit" class="submit-btn">إنشاء حساب جديد</button>
+      </form>
+    </div>
+
+    <div class="auth-visual-side">
+      <img src="assets/hero.jpg" alt="محمصة أثر" />
+      <div class="visual-overlay">
+        <span style="background: var(--bg-hero-card); color: var(--espresso); padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 800; width: fit-content; margin-bottom: 12px;">نادي ذواقة أثر</span>
+        <h2 style="font-family: 'Cairo', sans-serif; font-size: 26px; font-weight: 800; margin-bottom: 10px;">خصم ١٥٪ على طلبك الأول وشحن مجاني للمشتركين</h2>
+        <p style="font-size: 15px; opacity: 0.9; line-height: 1.65;">انضم لأكثر من ٤٥,٠٠٠ محب للقهوة المختصة واستمتع بمحاصيل محمصة يدوياً يومياً.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function switchTab(mode) {
+      document.getElementById('tLogin').classList.toggle('active', mode === 'login');
+      document.getElementById('tReg').classList.toggle('active', mode === 'reg');
+      document.getElementById('fLogin').style.display = mode === 'login' ? 'block' : 'none';
+      document.getElementById('fReg').style.display = mode === 'reg' ? 'block' : 'none';
+    }
+
+    document.getElementById('fLogin').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const inputVal = this.querySelector('input[type="text"]').value.trim();
+      if (inputVal.toLowerCase() === 'admin' || inputVal.toLowerCase() === 'admin@atharcoffee.sa') {
+        localStorage.setItem('athar_logged_user', 'المدير (Admin)');
+        localStorage.setItem('athar_user_role', 'admin');
+        alert('مرحباً بك أيها المدير! جاري تحويلك إلى لوحة التحكم الإدارية.');
+        window.location.href = 'admin.html';
+        return;
+      }
+      const user = inputVal.includes('@') ? inputVal.split('@')[0] : inputVal;
+      localStorage.setItem('athar_logged_user', user);
+      localStorage.setItem('athar_user_role', 'customer');
+      alert(`مرحباً بعودتك يا ${user}! تم تسجيل الدخول بنجاح.`);
+      window.location.href = 'index.html';
+    });
+
+    document.getElementById('fReg').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = this.querySelector('input[type="text"]').value.trim();
+      localStorage.setItem('athar_logged_user', name);
+      localStorage.setItem('athar_user_role', 'customer');
+      alert(`تم إنشاء حسابك بنجاح يا ${name}! كود خصمك الترحيبي: ATHAR15`);
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

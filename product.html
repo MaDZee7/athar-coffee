@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تفاصيل المحصول | محمصة أثر</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/athar-theme.css" />
+  <style>
+    .product-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 40px;
+      margin-bottom: 56px;
+      align-items: start;
+    }
+    .product-gallery-card {
+      background: var(--bg-product-card);
+      border-radius: 26px;
+      padding: 18px;
+      border: 1px solid rgba(158, 125, 93, 0.22);
+    }
+    .main-prod-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 18px;
+      background: var(--card-brown);
+      margin-bottom: 14px;
+    }
+    .thumb-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .thumb-strip img {
+      width: 100%;
+      height: 68px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    .thumb-strip img.active { border-color: var(--espresso); }
+    .spec-badges {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .spec-box {
+      background: var(--bg-product-card);
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(158, 125, 93, 0.2);
+    }
+    .spec-box span { font-size: 12px; color: var(--text-muted); display: block; }
+    .spec-box strong { font-size: 15px; color: var(--espresso); }
+    .weight-pills {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .weight-pill {
+      flex: 1;
+      padding: 11px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(158, 125, 93, 0.35);
+      background: var(--bg-product-card);
+      font-family: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .weight-pill.active {
+      background: var(--espresso);
+      color: #f6eee3;
+      border-color: var(--espresso);
+    }
+    .meter-row { margin-bottom: 10px; }
+    .meter-label { display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; margin-bottom: 4px; }
+    .meter-bar { height: 8px; background: var(--bg-hero-card); border-radius: 999px; overflow: hidden; }
+    .meter-fill { height: 100%; background: var(--espresso); border-radius: 999px; }
+    @media (max-width: 860px) {
+      .product-detail-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="header-actions">
+        <button class="icon-btn" id="cartBtn" aria-label="سلة التسوق">
+          <span class="cart-badge" id="cartCount">0</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="21" r="1.5"/><circle cx="19" cy="21" r="1.5"/><path d="M2.5 3h2.8l2.2 11.2a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 1.9-1.4L23 6H6"/></svg>
+        </button>
+        <button class="login-btn" id="loginBtn" type="button">تسجيل الدخول</button>
+      </div>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">الرئيسية</a>
+        <a href="shop.html" class="nav-link active">المتجر</a>
+        <a href="subscriptions.html" class="nav-link">الاشتراكات</a>
+        <a href="brewing-guide.html" class="nav-link">دليل التحضير</a>
+        <a href="wholesale.html" class="nav-link">مبيعات الجملة</a>
+        <a href="about.html" class="nav-link">قصتنا</a>
+        <a href="blog.html" class="nav-link">المدونة</a>
+        <a href="locations.html" class="nav-link">الفروع</a>
+        <a href="faq.html" class="nav-link">الأسئلة</a>
+      </nav>
+
+      <a href="index.html" class="brand-logo"><img src="assets/logo.png" alt="أثر" /></a>
+    </header>
+
+    <div class="breadcrumb" style="margin-bottom: 18px;">
+      <a href="index.html">الرئيسية</a> / <a href="shop.html">المتجر</a> / <span id="bcTitle">إثيوبيا هيرلوم</span>
+    </div>
+
+    <!-- PRODUCT DETAIL SECTION -->
+    <section class="product-detail-grid">
+      <div class="product-gallery-card">
+        <img src="assets/prod4.jpg" alt="إثيوبيا هيرلوم" class="main-prod-img" id="mainProdImg" />
+        <div class="thumb-strip">
+          <img src="assets/prod4.jpg" class="active" onclick="swapImg(this)" alt="" />
+          <img src="assets/story-beans.jpg" onclick="swapImg(this)" alt="" />
+          <img src="assets/gallery3.jpg" onclick="swapImg(this)" alt="" />
+          <img src="assets/story-roaster.jpg" onclick="swapImg(this)" alt="" />
+        </div>
+      </div>
+
+      <div>
+        <span class="badge-pill" id="prodOriginBadge">إثيوبيا - يرقاتشيف • ارتفاع ٢١٠٠ متر</span>
+        <h1 style="font-size: 36px; font-weight: 900; margin-bottom: 10px;" id="prodTitle">إثيوبيا هيرلوم</h1>
+        <p style="font-size: 26px; font-weight: 900; color: var(--espresso); margin-bottom: 14px;" id="prodPrice">٧٥ ر.س</p>
+        <p style="font-size: 16px; color: var(--text-main); line-height: 1.75; margin-bottom: 18px;" id="prodDesc">
+          سلالة هيرلوم الإثيوبية الأصيلة من منطقة يرقاتشيف، تمنحك كوباً عطرياً غنياً بنكهات الخوخ والبرغموت والعسل الطبيعي.
+        </p>
+
+        <div class="spec-badges">
+          <div class="spec-box"><span>المعالجة</span><strong id="prodProcess">مجففة</strong></div>
+          <div class="spec-box"><span>درجة الحمص</span><strong id="prodRoast">فاتحة - متوسطة</strong></div>
+          <div class="spec-box"><span>الإيحاءات البارزة</span><strong id="prodNotes">خوخ، برغموت، عسل</strong></div>
+        </div>
+
+        <label style="display: block; font-size: 14px; font-weight: 800; margin-bottom: 8px;">اختر الوزن:</label>
+        <div class="weight-pills">
+          <button class="weight-pill active" data-mult="1" onclick="selectWeight(this, 1)">٢٥٠ غرام</button>
+          <button class="weight-pill" data-mult="1.85" onclick="selectWeight(this, 1.85)">٥٠٠ غرام (وفر ٨٪)</button>
+          <button class="weight-pill" data-mult="3.4" onclick="selectWeight(this, 3.4)">١ كيلوجرام (وفر ١٥٪)</button>
+        </div>
+
+        <div class="form-group">
+          <label>درجة الطحن:</label>
+          <select id="detailGrind" class="form-select">
+            <option value="حبوب كاملة (موصى به)">حبوب كاملة (موصى به)</option>
+            <option value="طحنة تقطير V60 / كيمكس">طحنة تقطير V60 / كيمكس</option>
+            <option value="طحنة إسبريسو ناعمة">طحنة إسبريسو ناعمة</option>
+            <option value="طحنة فرنش برس">طحنة فرنش برس</option>
+          </select>
+        </div>
+
+        <div style="display: flex; gap: 14px; margin: 22px 0;">
+          <button class="btn-primary" style="flex: 1; padding: 15px;" id="addDetailToCartBtn">إضافة إلى سلة التسوق ☕</button>
+          <a href="checkout.html" class="btn-outline">شراء فوري</a>
+        </div>
+
+        <!-- Sensory Profile Meters -->
+        <div class="surface-card" style="padding: 18px 22px;">
+          <h4 style="margin-bottom: 12px;">البصمة الحسية للمحصول (Sensory Profile)</h4>
+          <div class="meter-row">
+            <div class="meter-label"><span>الحلاوة الطبيعية</span><span>90%</span></div>
+            <div class="meter-bar"><div class="meter-fill" style="width: 90%;"></div></div>
+          </div>
+          <div class="meter-row">
+            <div class="meter-label"><span>القوام (Body)</span><span>78%</span></div>
+            <div class="meter-bar"><div class="meter-fill" style="width: 78%;"></div></div>
+          </div>
+          <div class="meter-row" style="margin-bottom: 0;">
+            <div class="meter-label"><span>الحمضية الفاكهية</span><span>82%</span></div>
+            <div class="meter-bar"><div class="meter-fill" style="width: 82%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-bottom" style="padding-top: 0;">
+        <span>© ٢٠٢٦ محمصة أثر للقهوة المختصة — جميع الحقوق محفوظة.</span>
+        <div class="payment-badges">
+          <a href="shop.html" class="pay-pill">العودة للمتجر</a>
+          <a href="brewing-guide.html" class="pay-pill">وصفة التحضير</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- CART DRAWER -->
+  <div class="modal-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="modal-header">
+      <h3>سلة التسوق</h3>
+      <button class="modal-close" id="closeCartBtn">×</button>
+    </div>
+    <div class="cart-items-list" id="cartItemsList"></div>
+    <div style="border-top: 1px solid rgba(158,125,93,0.25); padding-top: 16px;">
+      <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: 800; margin-bottom: 14px;">
+        <span>الإجمالي:</span>
+        <span id="cartTotalPrice">٠ ر.س</span>
+      </div>
+      <button class="btn-primary" id="checkoutBtn" style="width: 100%;">إتمام الطلب</button>
+    </div>
+  </aside>
+
+  <script src="js/athar-core.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const prodId = params.get('id') || 'athar-04';
+    const currentProd = ATHAR_CATALOG.find(p => p.id === prodId) || ATHAR_CATALOG[3];
+    let currentMultiplier = 1;
+
+    document.getElementById('bcTitle').textContent = currentProd.title;
+    document.getElementById('prodTitle').textContent = currentProd.title;
+    document.getElementById('prodOriginBadge').textContent = `${currentProd.origin} • ${currentProd.altitude}`;
+    document.getElementById('prodPrice').textContent = `${currentProd.price} ر.س`;
+    document.getElementById('prodDesc').textContent = currentProd.desc;
+    document.getElementById('prodProcess').textContent = currentProd.process;
+    document.getElementById('prodRoast').textContent = currentProd.roast;
+    document.getElementById('prodNotes').textContent = currentProd.notes;
+    document.getElementById('mainProdImg').src = currentProd.img;
+
+    function swapImg(el) {
+      document.querySelectorAll('.thumb-strip img').forEach(i => i.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById('mainProdImg').src = el.src;
+    }
+
+    function selectWeight(btn, mult) {
+      document.querySelectorAll('.weight-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentMultiplier = mult;
+      const newPrice = Math.round(currentProd.price * mult);
+      document.getElementById('prodPrice').textContent = `${newPrice} ر.س`;
+    }
+
+    document.getElementById('addDetailToCartBtn').addEventListener('click', () => {
+      const finalPrice = Math.round(currentProd.price * currentMultiplier);
+      const grind = document.getElementById('detailGrind').value;
+      AtharStore.addItem(currentProd.title, finalPrice, currentProd.img, grind);
+    });
+  </script>
+</body>
+</html>

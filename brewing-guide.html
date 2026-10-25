@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>دليل التحضير وحاسبة القهوة المختصة | محمصة أثر</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/athar-theme.css" />
+  <style>
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 48px;
+    }
+    .result-boxes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .res-box {
+      background: var(--bg-page);
+      padding: 18px;
+      border-radius: 16px;
+      text-align: center;
+    }
+    .res-box strong {
+      font-family: 'Cairo', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--espresso);
+      display: block;
+    }
+    @media (max-width: 860px) { .calc-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="site-header">
+      <div class="header-actions">
+        <button class="icon-btn" id="cartBtn"><span class="cart-badge" id="cartCount">0</span>🛒</button>
+        <button class="login-btn" id="loginBtn" type="button">تسجيل الدخول</button>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">الرئيسية</a>
+        <a href="shop.html" class="nav-link">المتجر</a>
+        <a href="subscriptions.html" class="nav-link">الاشتراكات</a>
+        <a href="brewing-guide.html" class="nav-link active">دليل التحضير</a>
+        <a href="wholesale.html" class="nav-link">مبيعات الجملة</a>
+        <a href="about.html" class="nav-link">قصتنا</a>
+        <a href="blog.html" class="nav-link">المدونة</a>
+        <a href="locations.html" class="nav-link">الفروع</a>
+        <a href="faq.html" class="nav-link">الأسئلة</a>
+      </nav>
+      <a href="index.html" class="brand-logo"><img src="assets/logo.png" alt="أثر" /></a>
+    </header>
+
+    <section class="page-hero">
+      <div>
+        <span class="badge-pill">⚖️ أداة الباريستا التفاعلية</span>
+        <h1>حاسبة النسب الذهبية ودليل التحضير</h1>
+        <p>اضبط كمية البن والماء ودرجة الحرارة بدقة علمية بحسب أداة التحضير المفضلة لديك.</p>
+      </div>
+    </section>
+
+    <div class="calc-grid">
+      <div class="surface-card">
+        <h3 style="margin-bottom: 18px;">١. اختر أداة التحضير وكمية البن</h3>
+        <div class="form-group">
+          <label>أداة الاستخلاص:</label>
+          <select id="brewMethod" class="form-select">
+            <option value="15" data-temp="91°C" data-time="2:45 دقيقة" data-grind="متوسطة النعومة">قمع التقطير V60 (النسبة 1:15)</option>
+            <option value="16" data-temp="92°C" data-time="3:30 دقيقة" data-grind="متوسطة">أداة كيمكس Chemex (النسبة 1:16)</option>
+            <option value="2" data-temp="93°C" data-time="28 ثانية" data-grind="ناعمة جداً">إسبريسو دبل شوت (النسبة 1:2)</option>
+            <option value="14" data-temp="88°C" data-time="2:00 دقيقة" data-grind="متوسطة النعومة">إيروبرس AeroPress (النسبة 1:14)</option>
+            <option value="12" data-temp="94°C" data-time="4:00 دقائق" data-grind="خشنة">فرنش برس French Press (النسبة 1:12)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>كمية البن المطحون (بالغرام): <strong id="gramsLabel">20 غرام</strong></label>
+          <input type="range" id="coffeeGrams" min="12" max="60" value="20" style="width: 100%; accent-color: var(--espresso);" />
+        </div>
+
+        <div class="result-boxes">
+          <div class="res-box">
+            <span>كمية الماء المطلوبة</span>
+            <strong id="waterOut">300 مل</strong>
+          </div>
+          <div class="res-box">
+            <span>صبة التزهير (Blooming)</span>
+            <strong id="bloomOut">50 مل</strong>
+          </div>
+          <div class="res-box">
+            <span>درجة الحرارة</span>
+            <strong id="tempOut">91°C</strong>
+          </div>
+          <div class="res-box">
+            <span>زمن الاستخلاص المثالي</span>
+            <strong id="timeOut">2:45 دقيقة</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="surface-card" style="background: var(--bg-hero-card);">
+        <h3 style="margin-bottom: 14px;">٢. مؤقت التقطير التفاعلي (Brew Timer)</h3>
+        <p style="margin-bottom: 20px;">شغّل المؤقت أثناء صب الماء لمتابعة مراحل التزهير والاستخلاص خطوة بخطوة.</p>
+        <div style="background: var(--bg-product-card); border-radius: 22px; padding: 30px; text-align: center; margin-bottom: 20px;">
+          <div id="timerDisplay" style="font-family: 'Cairo', sans-serif; font-size: 54px; font-weight: 900; color: var(--espresso);">00:00</div>
+          <p id="timerStepText" style="font-weight: 700; color: var(--text-muted);">جاهز للبدء — بلل الفلتر الورقي بالماء الساخن أولاً</p>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <button class="btn-primary" style="flex: 1;" id="startTimerBtn">بدء المؤقت ▶</button>
+          <button class="btn-outline" id="resetTimerBtn">إعادة ضبط</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-bottom" style="padding-top: 0;">
+        <span>© ٢٠٢٦ محمصة أثر للقهوة المختصة.</span>
+        <a href="shop.html" class="pay-pill">تسوق أدوات التحضير</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/athar-core.js"></script>
+  <script>
+    const methodEl = document.getElementById('brewMethod');
+    const gramsEl = document.getElementById('coffeeGrams');
+
+    function updateCalc() {
+      const ratio = Number(methodEl.value);
+      const grams = Number(gramsEl.value);
+      const opt = methodEl.options[methodEl.selectedIndex];
+      document.getElementById('gramsLabel').textContent = `${grams} غرام`;
+      document.getElementById('waterOut').textContent = `${grams * ratio} مل`;
+      document.getElementById('bloomOut').textContent = `${Math.round(grams * 2.5)} مل`;
+      document.getElementById('tempOut').textContent = opt.dataset.temp;
+      document.getElementById('timeOut').textContent = opt.dataset.time;
+    }
+
+    methodEl.addEventListener('change', updateCalc);
+    gramsEl.addEventListener('input', updateCalc);
+
+    // Timer
+    let secs = 0;
+    let interval = null;
+    const disp = document.getElementById('timerDisplay');
+    const stepTxt = document.getElementById('timerStepText');
+
+    document.getElementById('startTimerBtn').addEventListener('click', function() {
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+        this.textContent = 'استئناف المؤقت ▶';
+        return;
+      }
+      this.textContent = 'إيقاف مؤقت ⏸';
+      interval = setInterval(() => {
+        secs++;
+        const m = String(Math.floor(secs / 60)).padStart(2, '0');
+        const s = String(secs % 60).padStart(2, '0');
+        disp.textContent = `${m}:${s}`;
+        if (secs < 35) stepTxt.textContent = 'مرحلة التزهير (Blooming): صب الماء ببطء وانتظر خروج الغازات...';
+        else if (secs < 90) stepTxt.textContent = 'الصبة الثانية: صب بشكل حلزوني من المركز للأطراف...';
+        else stepTxt.textContent = 'الصبة الأخيرة: انتظر اكتمال التقطير واستمتع بقهوتك ☕';
+      }, 1000);
+    });
+
+    document.getElementById('resetTimerBtn').addEventListener('click', () => {
+      clearInterval(interval);
+      interval = null;
+      secs = 0;
+      disp.textContent = '00:00';
+      document.getElementById('startTimerBtn').textContent = 'بدء المؤقت ▶';
+      stepTxt.textContent = 'جاهز للبدء — بلل الفلتر الورقي بالماء الساخن أولاً';
+    });
+  </script>
+</body>
+</html>

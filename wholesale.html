@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مبيعات الجملة وحلول المقاهي (B2B) | محمصة أثر</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/athar-theme.css" />
+  <style>
+    .b2b-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 32px; margin-bottom: 48px; }
+    .b2b-feature { background: var(--bg-product-card); border-radius: 18px; padding: 22px; margin-bottom: 16px; border: 1px solid rgba(158,125,93,0.2); }
+    @media (max-width: 860px) { .b2b-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="site-header">
+      <div class="header-actions">
+        <button class="login-btn" id="loginBtn" type="button">تسجيل الدخول</button>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">الرئيسية</a>
+        <a href="shop.html" class="nav-link">المتجر</a>
+        <a href="subscriptions.html" class="nav-link">الاشتراكات</a>
+        <a href="brewing-guide.html" class="nav-link">دليل التحضير</a>
+        <a href="wholesale.html" class="nav-link active">مبيعات الجملة</a>
+        <a href="about.html" class="nav-link">قصتنا</a>
+        <a href="blog.html" class="nav-link">المدونة</a>
+        <a href="locations.html" class="nav-link">الفروع</a>
+        <a href="faq.html" class="nav-link">الأسئلة</a>
+      </nav>
+      <a href="index.html" class="brand-logo"><img src="assets/logo.png" alt="أثر" /></a>
+    </header>
+
+    <section class="page-hero">
+      <div>
+        <span class="badge-pill">🤝 شراكة نجاح للمقاهي، الفنادق، والمكاتب</span>
+        <h1>مبيعات الجملة وحلول التوريد (B2B)</h1>
+        <p>نوفر للمقاهي المختصة والشركات إمداداً مستداماً من البن المحمص طازجاً، مع تصميم خلطات حصرية وتدريب الباريستا.</p>
+      </div>
+    </section>
+
+    <div class="b2b-grid">
+      <div>
+        <div class="b2b-feature">
+          <h3>١. خلطات إسبريسو مخصصة لعلامتك (Private Blend)</h3>
+          <p style="color: var(--text-muted); margin-top: 6px;">نصمم لمقهاك بصمة حسية خاصة بثبات تام في الطعم والكريما على مدار العام بعبوات ١ كجم و ٣ كجم.</p>
+        </div>
+        <div class="b2b-feature">
+          <h3>٢. استشارات ومعايرة مكائن الإسبريسو</h3>
+          <p style="color: var(--text-muted); margin-top: 6px;">فريقنا الفني يزور مقهاك لضبط المطاحن، جودة المياه، ووصفات الاستخلاص لضمان أفضل كوب لعملائك.</p>
+        </div>
+        <div class="b2b-feature">
+          <h3>٣. عينات مجانية قبل التعاقد</h3>
+          <p style="color: var(--text-muted); margin-top: 6px;">نرسل لك صندوق عينات مجاني يضم ٥ محاصيل لتجربتها في مقهاك قبل اعتماد الطلبية.</p>
+        </div>
+      </div>
+
+      <div class="surface-card">
+        <h3 style="margin-bottom: 16px;">اطلب تسعيرة جملة أو صندوق عينات للمقهى</h3>
+        <form onsubmit="event.preventDefault(); AtharStore.showToast('تم استلام طلب الجملة بنجاح! سيتواصل معك مدير حسابات المقاهي خلال ٢٤ ساعة 🤝'); this.reset();">
+          <div class="form-group">
+            <label>اسم المقهى / الشركة</label>
+            <input type="text" class="form-input" placeholder="مثال: مقهى رشفة المختص" required />
+          </div>
+          <div class="form-group">
+            <label>المدينة</label>
+            <input type="text" class="form-input" placeholder="الرياض، جدة، الدمام..." required />
+          </div>
+          <div class="form-group">
+            <label>الاستهلاك الشهري المتوقع (بالكيلوجرام)</label>
+            <select class="form-select">
+              <option>من ١٥ إلى ٣٠ كجم شهرياً</option>
+              <option>من ٣٠ إلى ٨٠ كجم شهرياً</option>
+              <option>أكثر من ٨٠ كجم شهرياً</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>رقم التواصل (واتساب / جوال)</label>
+            <input type="tel" class="form-input" placeholder="05XXXXXXXX" required />
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%;">إرسال طلب الشراكة وعرض السعر</button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-bottom" style="padding-top: 0;">
+        <span>© ٢٠٢٦ محمصة أثر للقهوة المختصة — قسم مبيعات الجملة.</span>
+      </div>
+    </footer>
+  </div>
+  <script src="js/athar-core.js"></script>
+</body>
+</html>

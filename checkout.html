@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إتمام الطلب والدفع الآمن | محمصة أثر</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/athar-theme.css" />
+  <style>
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1.25fr 0.9fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .pay-method-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .pay-option {
+      border: 1.5px solid rgba(158, 125, 93, 0.35);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 15.5px;
+    }
+    @media (max-width: 860px) { .checkout-layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="site-header">
+      <div class="header-actions">
+        <a href="shop.html" class="login-btn">العودة للمتجر</a>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">الرئيسية</a>
+        <a href="shop.html" class="nav-link">المتجر</a>
+        <a href="checkout.html" class="nav-link active">إتمام الطلب</a>
+      </nav>
+      <a href="index.html" class="brand-logo"><img src="assets/logo.png" alt="أثر" /></a>
+    </header>
+
+    <section class="page-hero">
+      <div>
+        <span class="badge-pill">🔒 دفع إلكتروني مشفر وآمن ١٠٠٪</span>
+        <h1>إتمام الطلب والشحن</h1>
+        <p>أكمل بيانات العنوان واختر وسيلة الدفع المفضلة ليبدأ فريقنا بتحميص وتجهيز محاصيلك فوراً.</p>
+      </div>
+    </section>
+
+    <div class="checkout-layout">
+      <form class="surface-card" id="finalCheckoutForm">
+        <h3 style="margin-bottom: 18px;">١. بيانات التوصيل والشحن</h3>
+        <div class="form-group">
+          <label>الاسم الكامل</label>
+          <input type="text" class="form-input" placeholder="الاسم الثلاثي" required />
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label>رقم الجوال</label>
+            <input type="tel" class="form-input" placeholder="05XXXXXXXX" required />
+          </div>
+          <div class="form-group">
+            <label>المدينة</label>
+            <input type="text" class="form-input" placeholder="الرياض، جدة، الخبر..." required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>العنوان التفصيلي (الحي، الشارع، رقم المبنى)</label>
+          <input type="text" class="form-input" placeholder="حي العليا، طريق التحلية..." required />
+        </div>
+
+        <h3 style="margin: 24px 0 14px;">٢. اختر وسيلة الدفع</h3>
+        <div class="pay-method-grid">
+          <label class="pay-option"><input type="radio" name="pay" checked /> مدى / البطاقة البنكية</label>
+          <label class="pay-option"><input type="radio" name="pay" /> Apple Pay</label>
+          <label class="pay-option"><input type="radio" name="pay" /> تابي (٤ دفعات بدون فوائد)</label>
+          <label class="pay-option"><input type="radio" name="pay" /> تمارا (قسّمها على ٣)</label>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; padding: 15px; font-size: 16.5px;">تأكيد الطلب والدفع الآن</button>
+      </form>
+
+      <div class="surface-card" style="background: var(--bg-hero-card);">
+        <h3 style="margin-bottom: 16px;">ملخص سلة التسوق</h3>
+        <div id="checkoutItemsContainer" style="margin-bottom: 18px;"></div>
+
+        <div style="display: flex; gap: 8px; margin-bottom: 18px;">
+          <input type="text" id="couponInput" class="form-input" placeholder="كود الخصم (جرب ATHAR15)" />
+          <button type="button" class="btn-primary" id="applyCouponBtn">تطبيق</button>
+        </div>
+
+        <div style="border-top: 1px solid rgba(51,33,19,0.18); padding-top: 14px;">
+          <div class="summary-row"><span>المجموع الفرعي:</span><strong id="coSubtotal">٠ ر.س</strong></div>
+          <div class="summary-row"><span>الشحن السريع:</span><strong id="coShipping">٠ ر.س</strong></div>
+          <div class="summary-row" id="discountRow" style="display: none; color: var(--success);"><span>الخصم (١٥٪):</span><strong id="coDiscount">-٠ ر.س</strong></div>
+          <div class="summary-row" style="font-size: 20px; font-weight: 900; border-top: 1px solid rgba(51,33,19,0.18); padding-top: 12px;">
+            <span>الإجمالي النهائي:</span><span id="coTotal">٠ ر.س</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/athar-core.js"></script>
+  <script>
+    let discountRate = 0;
+
+    function renderCheckoutSummary() {
+      const cart = AtharStore.getCart();
+      const container = document.getElementById('checkoutItemsContainer');
+      const { subtotal, shipping } = AtharStore.getTotals();
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-muted);">السلة فارغة حالياً — تم وضع محصول افتراضي للمعاينة.</p>';
+      } else {
+        container.innerHTML = cart.map(item => `
+          <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-product-card); padding:10px 14px; border-radius:12px; margin-bottom:8px;">
+            <div><strong>${item.title}</strong> × ${item.qty}<br/><small style="color:var(--text-muted);">${item.grind}</small></div>
+            <strong>${item.price * item.qty} ر.س</strong>
+          </div>
+        `).join('');
+      }
+
+      const baseSub = subtotal || 75;
+      const baseShip = baseSub >= 199 ? 0 : 25;
+      const discAmount = Math.round(baseSub * discountRate);
+      const finalTotal = baseSub - discAmount + baseShip;
+
+      document.getElementById('coSubtotal').textContent = `${baseSub} ر.س`;
+      document.getElementById('coShipping').textContent = baseShip === 0 ? 'مجاني' : `${baseShip} ر.س`;
+      if (discountRate > 0) {
+        document.getElementById('discountRow').style.display = 'flex';
+        document.getElementById('coDiscount').textContent = `-${discAmount} ر.س`;
+      }
+      document.getElementById('coTotal').textContent = `${finalTotal} ر.س`;
+    }
+
+    document.getElementById('applyCouponBtn').addEventListener('click', () => {
+      const code = document.getElementById('couponInput').value.trim().toUpperCase();
+      if (code === 'ATHAR15') {
+        discountRate = 0.15;
+        renderCheckoutSummary();
+        AtharStore.showToast('تم تفعيل كود الخصم ATHAR15 (خصم ١٥٪) بنجاح 🎉');
+      } else {
+        AtharStore.showToast('جرب كود الترحيب: ATHAR15');
+      }
+    });
+
+    document.getElementById('finalCheckoutForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      AtharStore.clearCart();
+      alert('شكراً لطلبك من محمصة أثر! رقم طلبك #ATH-8493 — جاري تحميص وتجهيز محاصيلك.');
+      window.location.href = 'index.html';
+    });
+
+    renderCheckoutSummary();
+  </script>
+</body>
+</html>

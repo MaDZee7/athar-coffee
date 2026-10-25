@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مدونة وموسوعة القهوة المختصة | محمصة أثر</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/athar-theme.css" />
+  <style>
+    .articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .article-card { background: var(--bg-product-card); border-radius: 22px; overflow: hidden; border: 1px solid rgba(158,125,93,0.2); display: flex; flex-direction: column; }
+    .article-card img { width: 100%; height: 210px; object-fit: cover; }
+    .article-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
+    @media (max-width: 860px) { .articles-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="site-header">
+      <div class="header-actions">
+        <button class="login-btn" id="loginBtn" type="button">تسجيل الدخول</button>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">الرئيسية</a>
+        <a href="shop.html" class="nav-link">المتجر</a>
+        <a href="subscriptions.html" class="nav-link">الاشتراكات</a>
+        <a href="brewing-guide.html" class="nav-link">دليل التحضير</a>
+        <a href="wholesale.html" class="nav-link">مبيعات الجملة</a>
+        <a href="about.html" class="nav-link">قصتنا</a>
+        <a href="blog.html" class="nav-link active">المدونة</a>
+        <a href="locations.html" class="nav-link">الفروع</a>
+        <a href="faq.html" class="nav-link">الأسئلة</a>
+      </nav>
+      <a href="index.html" class="brand-logo"><img src="assets/logo.png" alt="أثر" /></a>
+    </header>
+
+    <section class="page-hero">
+      <div>
+        <span class="badge-pill">📖 مجلة أثر الثقافية</span>
+        <h1>مدونة وموسوعة القهوة المختصة</h1>
+        <p>مقالات علمية وعملية يكتبها خبراء التحميص والباريستا في محمصة أثر لإثراء معرفتك بالقهوة.</p>
+      </div>
+    </section>
+
+    <div class="articles-grid">
+      <article class="article-card">
+        <img src="assets/blog1.jpg" alt="وصفة V60" />
+        <div class="article-body">
+          <span style="font-size: 13px; color: var(--text-muted);">دليل التحضير • ٤ دقائق</span>
+          <h3 style="margin: 8px 0 10px;">كيف تضبط وصفة V60 مثالية في المنزل بخطوات بسيطة؟</h3>
+          <p style="font-size: 14.5px; color: var(--text-muted); margin-bottom: 18px;">تعرف على قاعدة النسبة الذهبية (1:15)، درجة حرارة الماء المناسبة، وكيفية توزيع الصبات الأربع لاستخلاص متوازن.</p>
+          <a href="brewing-guide.html" class="btn-outline" style="margin-top: auto;">جرب الوصفة في الحاسبة ←</a>
+        </div>
+      </article>
+
+      <article class="article-card">
+        <img src="assets/blog2.jpg" alt="معالجات القهوة" />
+        <div class="article-body">
+          <span style="font-size: 13px; color: var(--text-muted);">ثقافة البن • ٥ دقائق</span>
+          <h3 style="margin: 8px 0 10px;">الفرق بين المعالجة المجففة والمغسولة واللاهوائية</h3>
+          <p style="font-size: 14.5px; color: var(--text-muted); margin-bottom: 18px;">لماذا تتميز المحاصيل المجففة بقوام فاكهي ثقيل بينما تتألق المحاصيل المغسولة بصفاء الإيحاءات الحمضية والزهرية؟</p>
+          <a href="shop.html" class="btn-outline" style="margin-top: auto;">استكشف المحاصيل ←</a>
+        </div>
+      </article>
+
+      <article class="article-card">
+        <img src="assets/blog3.jpg" alt="تخزين القهوة" />
+        <div class="article-body">
+          <span style="font-size: 13px; color: var(--text-muted);">أسرار الحمص • ٣ دقائق</span>
+          <h3 style="margin: 8px 0 10px;">متى تستخدم القهوة بعد التحميص؟ وكيف تحفظها؟</h3>
+          <p style="font-size: 14.5px; color: var(--text-muted); margin-bottom: 18px;">اكتشف أهمية فترة راحة القهوة (Degassing) بعد الحمص، وأفضل الطرق لحماية الحبوب من الرطوبة والهواء.</p>
+          <a href="faq.html" class="btn-outline" style="margin-top: auto;">اقرأ المزيد في الأسئلة ←</a>
+        </div>
+      </article>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-bottom" style="padding-top: 0;">
+        <span>© ٢٠٢٦ محمصة أثر للقهوة المختصة.</span>
+        <a href="index.html" class="pay-pill">العودة للرئيسية</a>
+      </div>
+    </footer>
+  </div>
+  <script src="js/athar-core.js"></script>
+</body>
+</html>
