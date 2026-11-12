@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>دليل الاستخدام والتوثيق الشامل | قالب محمصة أثر (v2.0 PRO)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #efe0cd;
+      --bg-surface: #f6eee3;
+      --bg-card-alt: #dfc8a9;
+      --espresso: #332113;
+      --espresso-hover: #4a311d;
+      --text-main: #2e1d10;
+      --text-muted: #5c432e;
+      --border-color: rgba(158, 125, 93, 0.3);
+      --code-bg: #26180e;
+      --code-text: #f6eee3;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: 'Tajawal', 'Cairo', sans-serif;
+      line-height: 1.75;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Navigation */
+    .doc-sidebar {
+      background: var(--espresso);
+      color: #f6eee3;
+      padding: 32px 22px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .doc-brand h2 {
+      font-family: 'Cairo', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+
+    .doc-badge {
+      display: inline-block;
+      background: var(--bg-card-alt);
+      color: var(--espresso);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+
+    .doc-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .doc-nav a {
+      display: block;
+      color: rgba(246, 238, 227, 0.85);
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14.5px;
+      transition: all 0.2s ease;
+    }
+
+    .doc-nav a:hover {
+      background: rgba(246, 238, 227, 0.14);
+      color: #fff;
+    }
+
+    .doc-main {
+      padding: 42px 54px;
+      max-width: 1060px;
+    }
+
+    .doc-hero {
+      background: var(--bg-card-alt);
+      border-radius: 26px;
+      padding: 38px 42px;
+      margin-bottom: 36px;
+      border: 1px solid var(--border-color);
+    }
+
+    .doc-hero h1 {
+      font-family: 'Cairo', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--espresso);
+      margin-bottom: 10px;
+    }
+
+    .doc-section {
+      background: var(--bg-surface);
+      border-radius: 24px;
+      padding: 34px 38px;
+      margin-bottom: 28px;
+      border: 1px solid var(--border-color);
+    }
+
+    .doc-section h2 {
+      font-family: 'Cairo', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--espresso);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--bg-card-alt);
+    }
+
+    .doc-section h3 {
+      font-family: 'Cairo', sans-serif;
+      font-size: 18.5px;
+      font-weight: 800;
+      color: var(--espresso);
+      margin: 20px 0 10px;
+    }
+
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14.5px;
+    }
+
+    .doc-table th, .doc-table td {
+      padding: 12px 14px;
+      border: 1px solid var(--border-color);
+      text-align: right;
+    }
+
+    .doc-table th {
+      background: var(--bg-card-alt);
+      color: var(--espresso);
+      font-weight: 800;
+    }
+
+    .doc-table tr:nth-child(even) {
+      background: rgba(239, 224, 205, 0.35);
+    }
+
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 18px 22px;
+      border-radius: 14px;
+      overflow-x: auto;
+      direction: ltr;
+      text-align: left;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 13.5px;
+      line-height: 1.6;
+      margin: 14px 0;
+    }
+
+    code {
+      background: rgba(51, 33, 19, 0.1);
+      color: var(--espresso);
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 13.5px;
+      direction: ltr;
+      display: inline-block;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    .note-box {
+      background: rgba(223, 200, 169, 0.55);
+      border-right: 4px solid var(--espresso);
+      padding: 14px 18px;
+      border-radius: 10px;
+      margin: 16px 0;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      body { grid-template-columns: 1fr; }
+      .doc-sidebar { height: auto; position: relative; }
+      .doc-main { padding: 24px 18px; }
+      .doc-section { padding: 24px 20px; }
+      .doc-table { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="doc-sidebar">
+    <div>
+      <div class="doc-brand">
+        <h2>محمصة أثر • التوثيق</h2>
+        <span class="doc-badge">الإصدار التجاري v2.0 PRO</span>
+      </div>
+      <ul class="doc-nav">
+        <li><a href="#intro">١. نظرة عامة وهيكلية الملفات</a></li>
+        <li><a href="#pages">٢. دليل الصفحات الـ 13 ووظائفها</a></li>
+        <li><a href="#colors-fonts">٣. تعديل الألوان والخطوط (CSS)</a></li>
+        <li><a href="#scripts">٤. تعديل المنتجات والتفاعلات (JS)</a></li>
+        <li><a href="#assets">٥. استبدال الصور والشعار (Assets)</a></li>
+        <li><a href="#admin">٦. الدخول للوحة التحكم (Admin)</a></li>
+      </ul>
+    </div>
+    <div style="font-size: 13px; opacity: 0.75; margin-top: 24px;">
+      شكراً لشرائك قالب محمصة أثر للقهوة المختصة ☕
+    </div>
+  </aside>
+
+  <main class="doc-main">
+    <header class="doc-hero">
+      <h1>دليل استخدام وتخصيص قالب «محمصة أثر»</h1>
+      <p>مرحباً بك! هذا الدليل المفصل باللغة العربية يشرح لك خطوة بخطوة كيفية تصفح وتعديل وتخصيص جميع صفحات القالب الـ 13، وتغيير الهوية البصرية والألوان والمنتجات والصور بكل سهولة دون الحاجة لخبرة برمجية معقدة.</p>
+    </header>
+
+    <!-- 1. OVERVIEW -->
+    <section class="doc-section" id="intro">
+      <h2>١. نظرة عامة وهيكلية مجلدات القالب</h2>
+      <p>تم بناء القالب باستخدام أحدث معايير الويب القياسية النظيفة (<strong>HTML5 + CSS3 + Vanilla JavaScript ES6</strong>) بالاتجاه العربي الأصيل (<code>RTL</code>)، وهو متجاوب 100% مع جميع الشاشات (الجوال، التابلت، والكمبيوتر) ولا يتطلب أي مكتبات خارجية معقدة لتشغيله.</p>
+
+      <pre><code>athar-coffee/
+├── index.html              # 1. الصفحة الرئيسية الكاملة للمحمصة والمتجر
+├── shop.html               # 2. صفحة المتجر الكامل مع الفلترة والبحث والفرز
+├── product.html            # 3. صفحة تفاصيل المحصول الفردي وخيارات الوزن والطحن
+├── subscriptions.html      # 4. صفحة باقات الاشتراك الشهري التفاعلية
+├── brewing-guide.html      # 5. دليل التحضير التفاعلي وحاسبة النسب ومؤقت التقطير
+├── wholesale.html          # 6. صفحة مبيعات الجملة وحلول المقاهي والشركات (B2B)
+├── blog.html               # 7. مدونة وموسوعة القهوة المختصة
+├── locations.html          # 8. صفحة الفروع وحجز جلسات التذوق الأسبوعية (Cupping)
+├── about.html              # 9. صفحة من نحن وقصة المحمصة ومراحل التحميص
+├── faq.html                # 10. صفحة الأسئلة الشائعة وسياسات المتجر
+├── checkout.html           # 11. صفحة إتمام الطلب والدفع الآمن وتطبيق الكوبونات
+├── login.html              # 12. صفحة تسجيل الدخول وإنشاء الحساب (مع توجيه الأدمن)
+├── admin.html              # 13. لوحة تحكم الإدارة الشاملة (7 أنظمة إدارية)
+├── css/
+│   └── athar-theme.css     # ملف التصميم الموحد ومتغيرات الألوان والخطوط والتجاوب
+├── js/
+│   └── athar-core.js       # المحرك البرمجي للمتجر وسلة التسوق وبيانات المحاصيل
+├── assets/                 # مجلد الصور الفوتوغرافية عالية الدقة والشعار
+└── Documentation/
+    └── index.html          # ملف التوثيق ودليل الاستخدام العربي (هذا الملف)</code></pre>
+    </section>
+
+    <!-- 2. PAGES LIST -->
+    <section class="doc-section" id="pages">
+      <h2>٢. قائمة الصفحات الـ 13 المرفقة ووظيفة كل صفحة</h2>
+      <p>يحتوي القالب على 13 صفحة مترابطة بالكامل تغطي كافة احتياجات متجر القهوة المختصة والمحمصة:</p>
+
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>اسم الملف</th>
+            <th>اسم الصفحة</th>
+            <th>الوظيفة والتفاصيل التفاعلية</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><code>index.html</code></td>
+            <td>الصفحة الرئيسية</td>
+            <td>تضم البانر الترحيبي (Hero)، المحاصيل المختارة مع التبويبات، الكتالوج الموسع (١٢ منتجاً)، قسم قصتنا، معرض الصور (Bento Grid)، المدونة، الفروع، الأسئلة الشائعة، ونوافذ المعاينة السريعة.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><code>shop.html</code></td>
+            <td>المتجر الكامل</td>
+            <td>صفحة تسوق شاملة تحتوي على شريط جانبي للتصفية حسب التصنيف ودرجة الحمص، بالإضافة إلى شريط بحث حي وفرز حسب السعر (الأقل أو الأعلى).</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><code>product.html</code></td>
+            <td>تفاصيل المحصول</td>
+            <td>صفحة عرض المنتج الفردي مع معرض صور مصغرة، أزرار اختيار الوزن (٢٥٠غ، ٥٠٠غ، ١ كجم) مع تحديث السعر تلقائياً، اختيار درجة الطحن، ومؤشرات البصمة الحسية.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><code>subscriptions.html</code></td>
+            <td>الاشتراكات الشهرية</td>
+            <td>عرض ٣ باقات اشتراك شهري في القهوة المختصة مع إمكانية الاشتراك الفوري وإضافة الباقة مباشرة إلى سلة التسوق.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><code>brewing-guide.html</code></td>
+            <td>دليل وحاسبة التحضير</td>
+            <td>تضم حاسبة تفاعلية للنسب الذهبية (V60, Chemex, Espresso, AeroPress, French Press) تحسب كمية الماء والتزهير تلقائياً، مع مؤقت تقطير (Stopwatch) حي خطوة بخطوة.</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><code>wholesale.html</code></td>
+            <td>مبيعات الجملة (B2B)</td>
+            <td>مخصصة للمقاهي والفنادق والشركات، تعرض مزايا التوريد والخلطات الخاصة مع نموذج طلب تسعيرة جملة أو صندوق عينات مجاني.</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><code>blog.html</code></td>
+            <td>مدونة القهوة المختصة</td>
+            <td>عرض المقالات الثقافية والعلمية حول تحميص القهوة ومعالجاتها وطرق استخلاصها.</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><code>locations.html</code></td>
+            <td>الفروع وجلسات التذوق</td>
+            <td>تستعرض فروع المحمصة وأوقات العمل مع نموذج تفاعلي لحجز مقعد مجاني في جلسة التذوق الأسبوعية (Cupping Session).</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><code>about.html</code></td>
+            <td>من نحن وقصتنا</td>
+            <td>تستعرض فلسفة المحمصة ومراحل العناية بحبوب البن من الاستيراد المباشر وحتى التحميص وضبط الجودة.</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><code>faq.html</code></td>
+            <td>الأسئلة الشائعة</td>
+            <td>مركز مساعدة يجيب عن استفسارات العملاء حول درجات الطحن، تواريخ الحمص، وسائل الدفع، ومدة الشحن.</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><code>checkout.html</code></td>
+            <td>إتمام الطلب والدفع</td>
+            <td>نموذج بيانات الشحن، اختيار وسيلة الدفع (مدى، Apple Pay، تابي، تمارا)، ملخص السلة، وتفعيل كود الخصم الفعال (<code>ATHAR15</code>).</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><code>login.html</code></td>
+            <td>تسجيل الدخول / حساب جديد</td>
+            <td>صفحة مصادقة مزدوجة للتبديل بين تسجيل الدخول وإنشاء حساب جديد، وتحتوي على نظام توجيه ذكي ينقل المدير تلقائياً إلى لوحة التحكم.</td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td><code>admin.html</code></td>
+            <td>لوحة تحكم الإدارة</td>
+            <td>لوحة تحكم متكاملة تضم ٧ أقسام: المؤشرات العامة، إدارة الطلبات والفواتير، إدارة المحاصيل وإضافة منتج جديد، مخزون البن الأخضر، العملاء والاشتراكات، الكوبونات، وإعدادات المتجر.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 3. COLORS & FONTS -->
+    <section class="doc-section" id="colors-fonts">
+      <h2>٣. طريقة تعديل الألوان والخطوط من ملف <code>css/athar-theme.css</code></h2>
+      <p>يعتمد القالب على نظام المتغيرات اللونية (<strong>CSS Custom Properties</strong>). لتغيير ألوان القالب بالكامل لتناسب هويتك التجارية، افتح ملف <code>css/athar-theme.css</code> وعدّل القيم الموجودة في أول ٢٠ سطراً داخل <code>:root</code>:</p>
+
+      <pre><code>:root {
+  --bg-page: #efe0cd;           /* لون خلفية الموقع الرئيسية (بيج رملي دافئ) */
+  --bg-hero-card: #dfc8a9;      /* لون البطاقات البارزة والبانر */
+  --bg-product-card: #f6eee3;   /* لون خلفية بطاقات المنتجات والأسطح */
+  --bg-icon-btn: #dfcaae;       /* لون أزرار الأيقونات في الهيدر */
+  --espresso: #332113;          /* اللون الأساسي الداكن للنصوص والأزرار (بني إسبريسو) */
+  --espresso-hover: #4a311d;    /* لون الأزرار عند تمرير الماوس */
+  --text-main: #2e1d10;         /* لون النصوص الأساسية */
+  --text-muted: #5c432e;        /* لون النصوص الفرعية والوصف */
+  --card-brown: #bb8255;        /* لون خلفية صور أكياس القهوة */
+  --accent-gold: #c88a4b;       /* اللون الذهبي المساعد */
+}</code></pre>
+
+      <div class="note-box">
+        💡 ملاحظة للصفحة الرئيسية: تحتوي صفحة <code>index.html</code> على نسخة مدمجة من نفس متغيرات <code>:root</code> في أعلى وسم <code>&lt;style&gt;</code> لسرعة التحميل الفوري، لذا يمكنك نسخ نفس كود الألوان ولصقه في أعلى <code>index.html</code> أيضاً.
+      </div>
+
+      <h3>تغيير الخطوط العربية (Google Fonts):</h3>
+      <p>يستخدم القالب خطي <strong>Cairo</strong> للعناوين و <strong>Tajawal</strong> للنصوص. لتغيير الخط، استبدل رابط Google Fonts في ترويسة <code>&lt;head&gt;</code> الصفحة، ثم عدّل خاصية <code>font-family</code> في <code>body</code> داخل ملف <code>css/athar-theme.css</code>.</p>
+    </section>
+
+    <!-- 4. SCRIPTS -->
+    <section class="doc-section" id="scripts">
+      <h2>٤. طريقة تعديل المنتجات والسكربتات من ملف <code>js/athar-core.js</code></h2>
+      <p>يتحكم ملف <code>js/athar-core.js</code> في جميع العمليات التفاعلية المشتركة بين صفحات الموقع، وتشمل:</p>
+      <ul style="padding-right: 22px; margin-bottom: 14px;">
+        <li><strong>قاعدة بيانات المحاصيل (<code>ATHAR_PRODUCTS</code>):</strong> مصفوفة تضم جميع المنتجات وتفاصيلها (الاسم، السعر، التصنيف، درجة الحمص، الإيحاءات، والصورة).</li>
+        <li><strong>نظام سلة التسوق (<code>AtharStore</code>):</strong> يحفظ المنتجات المضافة في ذاكرة المتصفح (<code>localStorage</code>) تحت المفتاح <code>athar_cart_v2</code> لتبقى السلة محفوظة أثناء التنقل بين جميع الصفحات.</li>
+        <li><strong>القائمة المتجاوبة للجوال (<code>initMobileMenu</code>):</strong> تنشئ زر القائمة (Hamburger Button) تلقائياً في شاشات الجوال والتابلت.</li>
+      </ul>
+
+      <h3>كيفية تعديل منتج أو إضافة محصول جديد في الكود:</h3>
+      <p>افتح ملف <code>js/athar-core.js</code> وعدّل عناصر مصفوفة <code>ATHAR_PRODUCTS</code> في بداية الملف كما يلي:</p>
+      <pre><code>const ATHAR_PRODUCTS = [
+  {
+    id: "p1",
+    title: "إثيوبيا هيرلوم",
+    origin: "إثيوبيا - يرقاتشيف • ارتفاع ٢١٠٠ متر",
+    category: "single-origin", // single-origin | espresso | drip-bags | equipment
+    roast: "فاتحة - متوسطة",
+    process: "مجففة (Natural)",
+    price: 75,
+    badge: "الأكثر مبيعاً",
+    notes: "خوخ، برغموت، عسل",
+    img: "assets/prod4.jpg",
+    desc: "وصف المحصول يظهر في صفحة تفاصيل المنتج..."
+  },
+  // يمكنك إضافة المزيد من المنتجات بنفس الصيغة
+];</code></pre>
+    </section>
+
+    <!-- 5. ASSETS -->
+    <section class="doc-section" id="assets">
+      <h2>٥. طريقة استبدال الصور والشعار في مجلد <code>assets/</code></h2>
+      <p>جميع الصور المستخدمة في القالب موجودة داخل مجلد <code>assets/</code>، ولها أسماء واضحة ومباشرة. لاستبدال أي صورة دون تعديل الكود، كل ما عليك فعله هو وضع صورتك الجديدة بنفس الاسم والامتداد:</p>
+
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th>اسم ملف الصورة</th>
+            <th>مكان ظهورها في القالب</th>
+            <th>الأبعاد المقترحة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>assets/logo.png</code></td>
+            <td>شعار الموقع في الهيدر والفوتر وصفحة تسجيل الدخول (يفضل خلفية شفافة PNG)</td>
+            <td><code>400 × 160 px</code></td>
+          </tr>
+          <tr>
+            <td><code>assets/hero.jpg</code></td>
+            <td>الصورة العريضة الرئيسية في أعلى الصفحة الرئيسية (Hero Banner)</td>
+            <td><code>1600 × 900 px</code></td>
+          </tr>
+          <tr>
+            <td><code>assets/prod1.jpg</code> إلى <code>prod4.jpg</code></td>
+            <td>صور أكياس المحاصيل الأربعة في قسم «محاصيلنا المختارة»</td>
+            <td><code>800 × 650 px</code></td>
+          </tr>
+          <tr>
+            <td><code>assets/prod5.jpg</code> إلى <code>prod8.jpg</code></td>
+            <td>صور المحاصيل الإضافية وكبسولات التقطير في الكتالوج والمتجر</td>
+            <td><code>800 × 600 px</code></td>
+          </tr>
+          <tr>
+            <td><code>assets/tool1.jpg</code> إلى <code>tool3.jpg</code> و <code>tool_v60.jpg</code></td>
+            <td>صور أدوات التحضير والمطاحن ومعدات الباريستا</td>
+            <td><code>800 × 600 px</code></td>
+          </tr>
+          <tr>
+            <td><code>assets/story-roaster.jpg</code>, <code>story-beans.jpg</code>, <code>story-sacks.jpg</code></td>
+            <td>صور قسم «قصتنا» وصفحة «من نحن»</td>
+            <td><code>1000 × 700 px</code></td>
+          </tr>
+          <tr>
+            <td><code>assets/gallery1.jpg</code> إلى <code>gallery4.jpg</code></td>
+            <td>صور معرض المحمصة الحي (Bento Photo Gallery)</td>
+            <td><code>1000 × 800 px</code></td>
+          </tr>
+          <tr>
+            <td><code>assets/blog1.jpg</code> إلى <code>blog3.jpg</code></td>
+            <td>صور مقالات المدونة</td>
+            <td><code>800 × 550 px</code></td>
+          </tr>
+          <tr>
+            <td><code>assets/branch1.jpg</code>, <code>branch2.jpg</code></td>
+            <td>صور الفروع في الرياض وجدة</td>
+            <td><code>900 × 600 px</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 6. ADMIN ACCESS -->
+    <section class="doc-section" id="admin">
+      <h2>٦. كيفية الدخول إلى لوحة التحكم الإدارية (<code>admin.html</code>)</h2>
+      <p>تم فصل لوحة التحكم الإدارية عن أزرار التصفح العادية بحيث لا يراها الزائر العادي للمتجر، ويمكن الوصول إليها بإحدى طريقتين:</p>
+      <ol style="padding-right: 22px; margin-top: 10px;">
+        <li><strong>عن طريق تسجيل الدخول بصلاحية المدير:</strong> افتح نافذة تسجيل الدخول أو صفحة <code>login.html</code>، واكتب في حقل البريد الإلكتروني/اسم المستخدم كلمة <code>admin</code> أو <code>admin@atharcoffee.sa</code> ثم اضغط دخول، وسيتم تحويلك تلقائياً إلى <code>admin.html</code>.</li>
+        <li><strong>عن طريق الرابط المباشر:</strong> فتح ملف <code>admin.html</code> مباشرة في المتصفح.</li>
+      </ol>
+    </section>
+  </main>
+
+</body>
+</html>
