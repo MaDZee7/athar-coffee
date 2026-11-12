@@ -395,8 +395,45 @@ const AtharStore = {
       });
     }
 
+    this.initMobileMenu();
     this.initGlobalAuthModal();
     this.updateCartUI();
+  },
+
+  initMobileMenu() {
+    const headerActions = document.querySelector('.header-actions');
+    const mainNav = document.querySelector('.main-nav');
+    if (!headerActions || !mainNav) return;
+
+    let menuBtn = document.getElementById('mobileMenuBtn');
+    if (!menuBtn) {
+      menuBtn = document.createElement('button');
+      menuBtn.type = 'button';
+      menuBtn.id = 'mobileMenuBtn';
+      menuBtn.className = 'mobile-menu-btn';
+      menuBtn.setAttribute('aria-label', 'القائمة');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.innerHTML = `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      `;
+      headerActions.insertBefore(menuBtn, headerActions.firstChild);
+    }
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('mobile-open');
+      menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('mobile-open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
   },
 
   initGlobalAuthModal() {

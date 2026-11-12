@@ -45,7 +45,14 @@
       gap: 10px;
       flex: 1;
     }
-    @media (max-width: 920px) { .plans-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 920px) {
+      .plans-grid { grid-template-columns: 1fr; gap: 18px; }
+      .plan-card.featured { transform: none; }
+    }
+    @media (max-width: 520px) {
+      .plan-card { padding: 24px 18px; border-radius: 20px; }
+      .plan-price { font-size: 30px; }
+    }
   </style>
 </head>
 <body>

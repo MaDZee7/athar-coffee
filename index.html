@@ -1523,30 +1523,156 @@
       opacity: 1;
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 1080px) {
+    /* Mobile Hamburger Button (Hidden on Desktop) */
+    .mobile-menu-btn {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background-color: var(--bg-icon-btn);
+      border: 1px solid rgba(51, 33, 19, 0.1);
+      align-items: center;
+      justify-content: center;
+      color: var(--espresso);
+      cursor: pointer;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .mobile-menu-btn:hover {
+      background-color: #d4bd9f;
+    }
+
+    /* Responsive adjustments across all devices */
+    @media (max-width: 1140px) {
       .page-wrapper { padding: 16px 24px 40px; }
-      .hero-card { width: 340px; padding: 32px 28px; }
-      .hero-title { font-size: 32px; }
-      .showcase-section, .about-bento, .faq-layout { grid-template-columns: 1fr; }
-      .section-intro { order: -1; padding-top: 8px; }
-      .catalog-grid { grid-template-columns: repeat(2, 1fr); }
-      .values-grid, .blog-grid, .branches-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-top { grid-template-columns: 1fr 1fr; }
+      .main-nav { gap: 13px; }
+      .nav-link { font-size: 14px; }
+      .hero-card { width: 350px; padding: 34px 28px; }
+      .hero-title { font-size: 33px; }
+    }
+
+    @media (max-width: 992px) {
+      .site-header {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 10px 0;
+      }
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+      .main-nav {
+        order: 3;
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        background-color: var(--bg-product-card);
+        border-radius: 18px;
+        padding: 12px;
+        border: 1px solid rgba(158, 125, 93, 0.25);
+        box-shadow: 0 14px 30px rgba(51, 33, 19, 0.12);
+        gap: 4px;
+        margin-top: 4px;
+      }
+      .main-nav.mobile-open {
+        display: flex;
+      }
+      .nav-link {
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-size: 15px;
+        width: 100%;
+        text-align: right;
+      }
+      .nav-link::after {
+        display: none;
+      }
+      .nav-link.active,
+      .nav-link:hover {
+        background-color: var(--bg-hero-card);
+      }
+      .showcase-section, .about-bento, .faq-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .section-intro {
+        order: -1;
+        padding-top: 4px;
+        padding-left: 0;
+      }
+      .products-grid, .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .values-grid, .blog-grid, .branches-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
     }
 
     @media (max-width: 768px) {
-      .site-header { flex-wrap: wrap; gap: 14px; }
-      .main-nav { order: 3; width: 100%; justify-content: center; gap: 18px; flex-wrap: wrap; }
-      .hero-section { flex-direction: column; }
-      .hero-image-container { width: 100%; height: 260px; }
-      .hero-card { position: relative; width: 92%; transform: none; margin-top: -40px; }
-      .products-grid, .catalog-grid, .values-grid, .blog-grid, .branches-grid, .stats-row, .footer-top {
+      .page-wrapper { padding: 12px 16px 32px; }
+      .brand-logo img { height: 46px; }
+      .login-btn { height: 38px; padding: 0 14px; font-size: 13.5px; }
+      .icon-btn, .mobile-menu-btn { width: 40px; height: 38px; border-radius: 10px; }
+      .hero-section { flex-direction: column; margin-bottom: 28px; }
+      .hero-image-container { width: 100%; height: 240px; border-radius: 20px; }
+      .hero-card {
+        position: relative;
+        width: 94%;
+        transform: none;
+        margin: -36px auto 0;
+        padding: 26px 22px;
+        border-radius: 20px;
+      }
+      .hero-title { font-size: 27px; margin-bottom: 12px; }
+      .hero-desc { font-size: 14.5px; margin-bottom: 20px; }
+      .hero-cta-group { flex-wrap: wrap; gap: 14px; }
+      .tabs-bar {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 6px;
+        gap: 18px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .heading-lg { font-size: 25px; }
+      .subtext-lg { font-size: 15px; }
+      .about-main-card { padding: 26px 20px; border-radius: 20px; }
+      .about-quote { font-size: 20px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .values-grid, .blog-grid, .branches-grid, .footer-top {
         grid-template-columns: 1fr;
       }
-      .gallery-bento { display: flex; flex-direction: column; }
-      .gallery-item { height: 220px; }
-      .modal-product-layout { grid-template-columns: 1fr; }
+      .gallery-bento { display: flex; flex-direction: column; gap: 14px; }
+      .gallery-item { height: 210px; }
+      .site-footer { padding: 34px 20px 24px; border-radius: 22px; }
+      .modal-box { padding: 22px 18px; border-radius: 20px; }
+      .modal-product-layout { grid-template-columns: 1fr; text-align: center; }
+      .modal-product-img { max-width: 180px; margin: 0 auto; }
+      .notes-badges { justify-content: center; }
+      .toast { left: 16px; right: 16px; bottom: 16px; text-align: center; }
+    }
+
+    @media (max-width: 460px) {
+      .products-grid, .catalog-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .hero-card { width: 96%; padding: 22px 18px; }
+      .hero-title { font-size: 24px; }
+      .hero-cta-group .btn-primary { width: 100%; justify-content: center; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-btn { padding: 12px; }
+      .footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
+      .payment-badges { justify-content: center; }
     }
   </style>
 </head>
@@ -1556,6 +1682,14 @@
     <!-- ================= HEADER ================= -->
     <header class="site-header">
       <div class="header-actions">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="القائمة الرئيسية" title="القائمة">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <line x1="4" y1="7" x2="20" y2="7"></line>
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="17" x2="20" y2="17"></line>
+          </svg>
+        </button>
+
         <button class="icon-btn" id="cartBtn" aria-label="سلة التسوق" title="سلة التسوق">
           <span class="cart-badge" id="cartCount">0</span>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
@@ -2664,6 +2798,15 @@
       searchBtnEl.addEventListener('click', () => {
         document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
         showToast('تصفح كافة محاصيلنا وأدوات التحضير أدناه 🔍');
+      });
+    }
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNavEl = document.querySelector('.main-nav');
+    if (mobileMenuBtn && mainNavEl) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mainNavEl.classList.toggle('mobile-open');
       });
     }
 

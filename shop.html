@@ -64,6 +64,9 @@
     }
     @media (max-width: 640px) {
       .shop-grid { grid-template-columns: 1fr; }
+      .shop-toolbar { flex-direction: column; align-items: stretch; }
+      .shop-toolbar > div { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+      .shop-toolbar input, .shop-toolbar select { width: 100% !important; }
     }
   </style>
 </head>

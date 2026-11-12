@@ -26,7 +26,12 @@
     .step-card h3, .step-card p { padding: 0 20px; }
     .step-card h3 { font-family: 'Cairo', sans-serif; color: var(--espresso); margin-bottom: 8px; }
     .step-card p { color: var(--text-muted); line-height: 1.7; font-size: 15px; }
-    @media (max-width: 860px) { .hero-banner, .steps-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 860px) {
+      .hero-banner, .steps-grid { grid-template-columns: 1fr; }
+      .hero-banner { padding: 28px 20px; border-radius: 22px; }
+      .hero-banner h1 { font-size: 26px !important; }
+      .hero-banner img { height: 240px; }
+    }
   </style>
 </head>
 <body>

@@ -83,7 +83,15 @@
     .meter-bar { height: 8px; background: var(--bg-hero-card); border-radius: 999px; overflow: hidden; }
     .meter-fill { height: 100%; background: var(--espresso); border-radius: 999px; }
     @media (max-width: 860px) {
-      .product-detail-grid { grid-template-columns: 1fr; }
+      .product-detail-grid { grid-template-columns: 1fr; gap: 26px; }
+    }
+    @media (max-width: 560px) {
+      #prodTitle { font-size: 26px !important; }
+      #prodPrice { font-size: 22px !important; }
+      .spec-badges { grid-template-columns: 1fr; gap: 8px; }
+      .weight-pills { flex-direction: column; }
+      .thumb-strip { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+      .thumb-strip img { height: 52px; }
     }
   </style>
 </head>

@@ -138,8 +138,17 @@
     }
     .submit-btn:hover { background: var(--espresso-hover); }
     @media (max-width: 860px) {
-      .auth-container { grid-template-columns: 1fr; }
-      .auth-visual-side { min-height: 260px; order: -1; }
+      .auth-container { grid-template-columns: 1fr; width: 94%; border-radius: 22px; }
+      .auth-visual-side { min-height: 220px; order: -1; }
+      .visual-overlay { padding: 24px 20px; }
+      .auth-form-side { padding: 32px 24px; }
+    }
+    @media (max-width: 520px) {
+      .top-bar { padding: 14px 16px; }
+      .back-btn { padding: 8px 14px; font-size: 13.5px; }
+      .top-bar img { height: 42px !important; }
+      .auth-form-side { padding: 24px 18px; }
+      .auth-form-side h1 { font-size: 23px !important; }
     }
   </style>
 </head>
